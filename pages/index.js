@@ -19,10 +19,9 @@ const StyledImage = styled(Image)`
   margin-right: auto;
 `;
 
-const StyledH1 = styled.h1`
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+const HeaderText = styled.h1`
+  position: relative;
+  justify-self: center;
 `;
 
 export default function HomePage() {
@@ -32,7 +31,7 @@ export default function HomePage() {
         alt="Logo getInvolved"
         src={require(`../assets/images/Logo.png`).default}
       />
-      <StyledH1>List of projects</StyledH1>
+      <HeaderText>List of projects</HeaderText>
       <ProjectList />
     </Device>
   );
