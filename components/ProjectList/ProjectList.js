@@ -21,7 +21,7 @@ export default function ProjectList() {
   return (
     <div>
       {projects.map((project) => (
-        <ProjectPreview key={project.id} className={`div__${project.category}`}>
+        <ProjectPreview key={project.id}>
           <p>{project.category}</p>
           <h2>{project.title}</h2>
           <StyledImage
