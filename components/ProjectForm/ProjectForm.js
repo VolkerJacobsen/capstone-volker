@@ -78,6 +78,7 @@ export default function ProjectForm() {
               minlength="5"
               maxlength="20"
               required
+              placeholder="Enter your project title"
             />
           </label>
           <label>
@@ -87,6 +88,7 @@ export default function ProjectForm() {
               minlength="30"
               maxlength="100"
               required
+              placeholder="Enter a short description. Max. 100 characters."
             />
           </label>
           <label>
@@ -96,6 +98,7 @@ export default function ProjectForm() {
               minlength="50"
               maxlength="200"
               required
+              placeholder="Enter a long description. Max. 200 characters."
             />
           </label>
           <br />
@@ -108,11 +111,20 @@ export default function ProjectForm() {
           </Select>
           <label>
             <p>Organizer: </p>
-            <Input name="organizer" required />
+            <Input
+              name="organizer"
+              required
+              placeholder="Enter your organization"
+            />
           </label>
           <label>
             <p>Contact email: </p>
-            <Input name="contact" type="email" required />
+            <Input
+              name="contact"
+              type="email"
+              required
+              placeholder="Enter your email-address"
+            />
           </label>
         </Fieldset>
         <SubmitButton type="submit">Submit your project</SubmitButton>
