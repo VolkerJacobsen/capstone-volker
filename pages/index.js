@@ -1,6 +1,7 @@
 import ProjectList from "../components/ProjectList/ProjectList.js";
 import styled from "styled-components";
 import Image from "next/image";
+import ProjectForm from "../components/ProjectForm/ProjectForm.js";
 
 const Device = styled.div`
   position: relative;
@@ -33,6 +34,7 @@ export default function HomePage() {
       />
       <HeaderText>List of projects</HeaderText>
       <ProjectList />
+      <ProjectForm />
     </Device>
   );
 }
