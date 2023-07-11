@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import ProjectForm from "../components/ProjectForm/ProjectForm.js";
 import React, { useState } from "react";
-import { projects } from "../utils/data";
+import { projects as initialProjects } from "../utils/data";
 
 const Device = styled.div`
   position: relative;
@@ -28,7 +28,7 @@ const HeaderText = styled.h1`
 `;
 
 export default function HomePage() {
-  const [projectList, setProjectList] = useState(projects);
+  const [projectList, setProjectList] = useState(initialProjects);
 
   function handleAddProject(newProject) {
     const updatedProjectList = [
