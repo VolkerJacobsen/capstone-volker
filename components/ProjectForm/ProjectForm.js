@@ -93,41 +93,45 @@ export default function ProjectForm({ onAddProject }) {
       <h1>Publish your project</h1>
       <Form onSubmit={handleSubmit}>
         <Fieldset>
-          <label>
+          <label htmlFor="name">
             <p>Title: </p>
             <Input
               name="title"
               type="text"
               minLength="5"
               maxLength="20"
+              id="title"
               required
               placeholder="Enter your project title"
             />
           </label>
-          <label>
+          <label htmlFor="imageSource">
             <p>Image: </p>
             <input
               type="file"
               name="imageSource"
+              id="imageSource"
               accept="image/*"
               onChange={handleImageChange}
               required
             />
           </label>
-          <label>
+          <label htmlFor="shortDescription">
             <p>Short description: </p>
             <Textarea
               name="shortDescription"
+              id="shortDescription"
               minLength="30"
               maxLength="100"
               required
               placeholder="Enter a short description. Max. 100 characters."
             />
           </label>
-          <label>
+          <label htmelFor="longDescription">
             <p>Long description: </p>
             <Textarea
               name="longDescription"
+              id="longDescription"
               minLength="50"
               maxLength="200"
               required
@@ -136,24 +140,26 @@ export default function ProjectForm({ onAddProject }) {
           </label>
           <br />
           <br />
-          <label>Select a category: </label>
-          <Select name="category" required>
+          <label htmlFor="category">Select a category: </label>
+          <Select name="category" id="category" required>
             <option value="Community">Community</option>
             <option value="Environment">Environment</option>
             <option value="Politics">Politics</option>
           </Select>
-          <label>
+          <label htmlFor="organizer">
             <p>Organizer: </p>
             <Input
               name="organizer"
+              id="organizer"
               required
               placeholder="Enter your organization"
             />
           </label>
-          <label>
+          <label htmlFor="contact">
             <p>Contact email: </p>
             <Input
               name="contact"
+              id="contact"
               type="email"
               required
               placeholder="Enter your email-address"
