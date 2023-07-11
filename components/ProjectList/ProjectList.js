@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
 import React from "react";
-import { projects } from "../../utils/data";
 
 const ProjectPreview = styled.div`
   background-color: #faf8f7;
@@ -17,7 +16,7 @@ const StyledImage = styled(Image)`
   border-radius: 5%;
 `;
 
-export default function ProjectList() {
+export default function ProjectList({ projects }) {
   return (
     <div>
       {projects.map((project) => (
@@ -26,7 +25,7 @@ export default function ProjectList() {
           <h2>{project.title}</h2>
           <StyledImage
             alt={`Photo ${project.title} by ${project.organizer}`}
-            src={require(`../../assets/images/${project.imageSource}`).default}
+            src={`/assets/images/${project.imageSource}`}
             width={project.width}
             height={project.height}
           />

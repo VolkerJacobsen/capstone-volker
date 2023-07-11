@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -48,6 +48,7 @@ const Textarea = styled.textarea`
   border: 1px solid rgb(204 203 203);
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   width: 100%;
+  font-family: system-ui;
 `;
 
 const Select = styled.select`
@@ -59,10 +60,32 @@ const Select = styled.select`
   margin-left: 30px;
 `;
 
-export default function ProjectForm() {
+export default function ProjectForm({ onAddProject }) {
+  const [imageFile, setImageFile] = useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        data.imageSource = reader.result;
+        onAddProject(data);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      onAddProject(data);
+    }
+
+    event.target.reset();
     alert("You have successfully submitted your project!");
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
   };
 
   return (
@@ -75,18 +98,28 @@ export default function ProjectForm() {
             <Input
               name="title"
               type="text"
-              minlength="5"
-              maxlength="20"
+              minLength="5"
+              maxLength="20"
               required
               placeholder="Enter your project title"
+            />
+          </label>
+          <label>
+            <p>Image: </p>
+            <input
+              type="file"
+              name="imageSource"
+              accept="image/*"
+              onChange={handleImageChange}
+              required
             />
           </label>
           <label>
             <p>Short description: </p>
             <Textarea
               name="shortDescription"
-              minlength="30"
-              maxlength="100"
+              minLength="30"
+              maxLength="100"
               required
               placeholder="Enter a short description. Max. 100 characters."
             />
@@ -95,8 +128,8 @@ export default function ProjectForm() {
             <p>Long description: </p>
             <Textarea
               name="longDescription"
-              minlength="50"
-              maxlength="200"
+              minLength="50"
+              maxLength="200"
               required
               placeholder="Enter a long description. Max. 200 characters."
             />
