@@ -2,7 +2,7 @@ import ProjectList from "../components/ProjectList/ProjectList.js";
 import styled from "styled-components";
 import Image from "next/image";
 import ProjectForm from "../components/ProjectForm/ProjectForm.js";
-import React, { useState } from "react";
+import { useState } from "react";
 import { projects as initialProjects } from "../utils/data";
 
 const Device = styled.div`

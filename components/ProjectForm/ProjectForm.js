@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -149,6 +149,7 @@ export default function ProjectForm({ onAddProject }) {
           <label htmlFor="organizer">
             <p>Organizer: </p>
             <Input
+              type="text"
               name="organizer"
               id="organizer"
               required

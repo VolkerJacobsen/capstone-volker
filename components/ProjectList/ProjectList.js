@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Image from "next/image";
-import React from "react";
 
 const ProjectPreview = styled.div`
   background-color: #faf8f7;
