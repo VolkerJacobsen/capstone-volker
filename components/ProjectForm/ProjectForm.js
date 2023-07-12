@@ -64,7 +64,7 @@ const Select = styled.select`
 export default function ProjectForm({ onAddProject }) {
   const [imageFile, setImageFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(
-    "/../../assets/images/placeholder-image.png"
+    "/assets/images/placeholder-image.png"
   );
 
   const handleSubmit = (event) => {
@@ -84,7 +84,7 @@ export default function ProjectForm({ onAddProject }) {
     }
 
     event.target.reset();
-    setPreviewImage("/../../assets/images/placeholder-image.png");
+    setPreviewImage("/assets/images/placeholder-image.png");
     alert("You have successfully submitted your project!");
   };
 
@@ -99,7 +99,7 @@ export default function ProjectForm({ onAddProject }) {
       };
       reader.readAsDataURL(file);
     } else {
-      setPreviewImage("/../../assets/images/placeholder-image.png");
+      setPreviewImage("/assets/images/placeholder-image.png");
     }
   };
 
