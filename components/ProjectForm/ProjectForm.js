@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Image from "next/image";
 
 const Form = styled.form`
   background-color: #faf8f7;
@@ -62,6 +63,9 @@ const Select = styled.select`
 
 export default function ProjectForm({ onAddProject }) {
   const [imageFile, setImageFile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(
+    "/../../assets/images/placeholder-image.png"
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -80,12 +84,23 @@ export default function ProjectForm({ onAddProject }) {
     }
 
     event.target.reset();
+    setPreviewImage("/../../assets/images/placeholder-image.png");
     alert("You have successfully submitted your project!");
   };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImageFile(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPreviewImage("/../../assets/images/placeholder-image.png");
+    }
   };
 
   return (
@@ -101,10 +116,19 @@ export default function ProjectForm({ onAddProject }) {
               minLength="5"
               maxLength="20"
               id="title"
-              required
               placeholder="Enter your project title"
+              required
             />
           </label>
+          <div>
+            <Image
+              id="placeholder-image"
+              src={previewImage}
+              alt="placeholder image"
+              width="670"
+              height="400"
+            />
+          </div>
           <label htmlFor="imageSource">
             <p>Image: </p>
             <input
