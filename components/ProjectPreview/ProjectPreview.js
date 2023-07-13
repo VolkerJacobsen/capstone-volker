@@ -18,6 +18,7 @@ const StyledImage = styled(Image)`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  color: black;
 `;
 
 export default function ProjectPreview({
@@ -31,7 +32,7 @@ export default function ProjectPreview({
   slug,
 }) {
   return (
-    <Link href={`/projects/${slug}`}>
+    <StyledLink href={`/projects/${slug}`}>
       <ProjectContainer>
         <p>{category}</p>
         <h2>{title}</h2>
@@ -43,6 +44,6 @@ export default function ProjectPreview({
         ></StyledImage>
         <p>{shortDescription}</p>
       </ProjectContainer>
-    </Link>
+    </StyledLink>
   );
 }

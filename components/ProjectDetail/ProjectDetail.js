@@ -16,14 +16,16 @@ const StyledImage = styled(Image)`
 `;
 
 export default function ProjectDetail({
-  category,
-  title,
-  imageSource,
-  width,
-  height,
-  longDescription,
-  organizer,
-  contact,
+  project: {
+    category,
+    title,
+    imageSource,
+    width,
+    height,
+    longDescription,
+    organizer,
+    contact,
+  },
 }) {
   return (
     <div>

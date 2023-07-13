@@ -5,7 +5,7 @@ export default function ProjectList({ projects }) {
     <div>
       {projects.map((project) => {
         return (
-          <div key={project.slug}>
+          <div key={project.id}>
             <>
               <ProjectPreview
                 category={project.category}

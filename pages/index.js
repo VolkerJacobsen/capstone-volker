@@ -21,6 +21,7 @@ const HeaderText = styled.h1`
 
 export default function HomePage() {
   const [projectList, setProjectList] = useState(initialProjects);
+  console.log("Tada!!!", projectList);
 
   function handleAddProject(newProject) {
     const updatedProjectList = [
