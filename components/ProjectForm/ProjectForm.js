@@ -64,7 +64,7 @@ const Select = styled.select`
 export default function ProjectForm({ onAddProject }) {
   const [imageFile, setImageFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(
-    "/assets/images/placeholder-image.png"
+    "/../../assets/images/placeholder-image.png"
   );
 
   const handleSubmit = (event) => {
@@ -84,7 +84,7 @@ export default function ProjectForm({ onAddProject }) {
     }
 
     event.target.reset();
-    setPreviewImage("/assets/images/placeholder-image.png");
+    setPreviewImage("/../../assets/images/placeholder-image.png");
     alert("You have successfully submitted your project!");
   };
 
@@ -99,7 +99,7 @@ export default function ProjectForm({ onAddProject }) {
       };
       reader.readAsDataURL(file);
     } else {
-      setPreviewImage("/assets/images/placeholder-image.png");
+      setPreviewImage("/../../assets/images/placeholder-image.png");
     }
   };
 
@@ -108,7 +108,7 @@ export default function ProjectForm({ onAddProject }) {
       <h1>Publish your project</h1>
       <Form onSubmit={handleSubmit}>
         <Fieldset>
-          <label htmlFor="name">
+          <label>
             <p>Title: </p>
             <Input
               name="title"
@@ -127,9 +127,10 @@ export default function ProjectForm({ onAddProject }) {
               alt="placeholder image"
               width="670"
               height="400"
+              hidden
             />
           </div>
-          <label htmlFor="imageSource">
+          <label>
             <p>Image: </p>
             <input
               type="file"
@@ -140,7 +141,7 @@ export default function ProjectForm({ onAddProject }) {
               required
             />
           </label>
-          <label htmlFor="shortDescription">
+          <label>
             <p>Short description: </p>
             <Textarea
               name="shortDescription"
@@ -151,7 +152,7 @@ export default function ProjectForm({ onAddProject }) {
               placeholder="Enter a short description. Max. 100 characters."
             />
           </label>
-          <label htmelFor="longDescription">
+          <label>
             <p>Long description: </p>
             <Textarea
               name="longDescription"
@@ -164,13 +165,15 @@ export default function ProjectForm({ onAddProject }) {
           </label>
           <br />
           <br />
-          <label htmlFor="category">Select a category: </label>
-          <Select name="category" id="category" required>
-            <option value="Community">Community</option>
-            <option value="Environment">Environment</option>
-            <option value="Politics">Politics</option>
-          </Select>
-          <label htmlFor="organizer">
+          <label>
+            Select a category:
+            <Select name="category" id="category" required>
+              <option value="Community">Community</option>
+              <option value="Environment">Environment</option>
+              <option value="Politics">Politics</option>
+            </Select>
+          </label>
+          <label>
             <p>Organizer: </p>
             <Input
               type="text"
@@ -180,7 +183,7 @@ export default function ProjectForm({ onAddProject }) {
               placeholder="Enter your organization"
             />
           </label>
-          <label htmlFor="contact">
+          <label>
             <p>Contact email: </p>
             <Input
               name="contact"

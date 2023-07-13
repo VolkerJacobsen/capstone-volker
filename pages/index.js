@@ -5,14 +5,6 @@ import ProjectForm from "../components/ProjectForm/ProjectForm.js";
 import { useState } from "react";
 import { projects as initialProjects } from "../utils/data";
 
-const Device = styled.div`
-  position: relative;
-  display: block;
-  width: 368px;
-  height: 100vh;
-  overflow: auto;
-`;
-
 const StyledImage = styled(Image)`
   display: block;
   max-width: 200px;
@@ -39,14 +31,14 @@ export default function HomePage() {
   }
 
   return (
-    <Device>
+    <>
       <StyledImage
         alt="Logo getInvolved"
-        src={require(`../public/assets/images/Logo.png`).default}
+        src={require(`/assets/images/Logo.png`).default}
       />
       <HeaderText>List of projects</HeaderText>
       <ProjectList projects={projectList} />
       <ProjectForm onAddProject={handleAddProject} />
-    </Device>
+    </>
   );
 }

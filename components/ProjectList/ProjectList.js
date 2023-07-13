@@ -1,21 +1,23 @@
-import ProjectPreview from "../ProjectPreview/ProjectPreview";
+import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 
 export default function ProjectList({ projects }) {
   return (
     <div>
       {projects.map((project) => {
         return (
-          <li key={project.slug}>
-            <ProjectPreview key={project.id}>
-              category={project.category}
-              title={project.title}
-              imageSource={project.imageSource}
-              width={project.width}
-              height={project.heigth}
-              slug={project.slug}
-              description={project.shortDescription}
-            </ProjectPreview>
-          </li>
+          <div key={project.slug}>
+            <>
+              <ProjectPreview
+                category={project.category}
+                title={project.title}
+                imageSource={project.imageSource}
+                width={project.width}
+                height={project.height}
+                organizer={project.organizer}
+                shortDescription={project.shortDescription}
+              ></ProjectPreview>
+            </>
+          </div>
         );
       })}
     </div>

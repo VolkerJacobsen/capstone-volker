@@ -1,10 +1,10 @@
-import ProjectDetail from "@/components/ProjectDetail";
+import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
 import { useRouter } from "next/router";
 
 export default function ProjectDetailsPage({ projects }) {
   const router = useRouter();
   const { slug } = router.query;
-  const singleProject = projects.find((project) => slug === project.slug);
+  const singleProject = projects.find((project) => project.slug === slug);
   console.log(singleProject);
 
   return (
@@ -12,8 +12,10 @@ export default function ProjectDetailsPage({ projects }) {
       category={singleProject.category}
       title={singleProject.title}
       image={singleProject.imageSource}
+      width={singleProject.width}
+      height={singleProject.height}
       organizer={singleProject.organizer}
-      description={singleProject.longDescription}
+      longDescription={singleProject.longDescription}
       contact={singleProject.contact}
     />
   );

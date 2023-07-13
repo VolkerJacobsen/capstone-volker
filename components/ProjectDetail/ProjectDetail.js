@@ -33,6 +33,7 @@ export default function ProjectDetail({
       <ProjectContainer>
         <p>{category}</p>
         <h2>{title}</h2>
+        <p>{organizer}</p>
         <StyledImage
           alt={`Photo ${title} by ${organizer}`}
           src={`/assets/images/${imageSource}`}

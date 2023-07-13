@@ -16,31 +16,25 @@ const StyledImage = styled(Image)`
   border-radius: 5%;
 `;
 
-export default function ProjectPreview({
-  category,
-  title,
-  imageSource,
-  organizer,
-  width,
-  height,
-  shortDescription,
-  slug,
-}) {
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
+export default function ProjectPreview({ project }) {
   return (
-    <>
-      <Link href={`/projects/${slug}`}>
-        <ProjectContainer>
-          <p>{category}</p>
-          <h2>{title}</h2>
-          <StyledImage
-            src={`/assets/images/${imageSource}`}
-            alt={`Photo ${title} by ${organizer}`}
-            width={width}
-            height={height}
-          ></StyledImage>
-          <p>{shortDescription}</p>
-        </ProjectContainer>
-      </Link>
-    </>
+    <StyledLink href={`/projects/${project.slug}`}>
+      <ProjectContainer>
+        <p>{project.category}</p>
+        <h2>{project.title}</h2>
+        <StyledImage
+          src={`/assets/images/${project.imageSource}`}
+          alt={`Photo ${project.title} by ${project.organizer}`}
+          width={project.width}
+          height={project.height}
+        ></StyledImage>
+        <p>{project.shortDescription}</p>
+      </ProjectContainer>
+    </StyledLink>
   );
 }
