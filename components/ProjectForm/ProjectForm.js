@@ -125,8 +125,8 @@ export default function ProjectForm({ onAddProject }) {
               id="placeholder-image"
               src={previewImage}
               alt="placeholder image"
-              width="670"
-              height="400"
+              width={670}
+              height={400}
               hidden
             />
           </div>
