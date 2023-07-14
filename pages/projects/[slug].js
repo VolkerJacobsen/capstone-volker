@@ -5,7 +5,7 @@ export default function ProjectDetailsPage({ projects }) {
   const router = useRouter();
   const { slug } = router.query;
   if (!slug) {
-    return;
+    return <div>Project not found</div>;
   }
   const currentProject = projects.find((project) => project.slug === slug);
 
