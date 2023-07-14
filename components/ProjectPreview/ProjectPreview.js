@@ -26,8 +26,6 @@ export default function ProjectPreview({
   title,
   imageSource,
   organizer,
-  width,
-  height,
   shortDescription,
   slug,
 }) {
@@ -37,10 +35,10 @@ export default function ProjectPreview({
         <p>{category}</p>
         <h2>{title}</h2>
         <StyledImage
-          src={`/assets/images/${imageSource}`}
+          src={require(`/assets/images/${imageSource}`).default}
           alt={`Photo ${title} by ${organizer}`}
-          width={width}
-          height={height}
+          width={670}
+          height={400}
         ></StyledImage>
         <p>{shortDescription}</p>
       </ProjectContainer>

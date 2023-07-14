@@ -11,10 +11,9 @@ export default function ProjectList({ projects }) {
                 category={project.category}
                 title={project.title}
                 imageSource={project.imageSource}
-                width={project.width}
-                height={project.height}
                 organizer={project.organizer}
                 shortDescription={project.shortDescription}
+                slug={project.slug}
               ></ProjectPreview>
             </>
           </div>

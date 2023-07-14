@@ -20,8 +20,6 @@ export default function ProjectDetail({
     category,
     title,
     imageSource,
-    width,
-    height,
     longDescription,
     organizer,
     contact,
@@ -38,9 +36,9 @@ export default function ProjectDetail({
         <p>{organizer}</p>
         <StyledImage
           alt={`Photo ${title} by ${organizer}`}
-          src={`/assets/images/${imageSource}`}
-          width={width}
-          height={height}
+          src={require(`/assets/images/${imageSource}`).default}
+          width={670}
+          height={400}
         />
         <p>{longDescription}</p>
         <p>{contact}</p>
