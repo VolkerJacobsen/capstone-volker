@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const StyledHeader = styled.header`
   width: 368px;
@@ -32,6 +33,18 @@ const StyledSelect = styled.select`
 `;
 
 export default function Header() {
+  const router = useRouter();
+  const currentPath = router.pathname;
+
+  function handleCategoryChange(event) {
+    const category = event.target.value;
+    if (category) {
+      router.push(`/§{category}`);
+    } else {
+      router.push("/");
+    }
+  }
+
   return (
     <StyledHeader>
       <StyledImage
@@ -40,11 +53,15 @@ export default function Header() {
         width={180}
         height={110}
       />
-      <StyledSelect name="categories" id="category">
-        <option value="">Category</option>
-        <option value="community">Community</option>
-        <option value="environment">Environment</option>
-        <option value="politics">Politics</option>
+      <StyledSelect
+        name="category"
+        id="category"
+        onChange={handleCategoryChange}
+      >
+        <option value="/">Category</option>
+        <option value="/community">Community</option>
+        <option value="/environment">Environment</option>
+        <option value="/politics">Politics</option>
       </StyledSelect>
     </StyledHeader>
   );

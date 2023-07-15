@@ -1,6 +1,6 @@
 import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 
-const EnvironmentPage = (projects) => {
+const PoliticsPage = (projects) => {
   const environmentProjects = projects.filter(
     (project) => project.category === "Politics"
   );
@@ -24,4 +24,4 @@ const EnvironmentPage = (projects) => {
   );
 };
 
-export default EnvironmentPage;
+export default PoliticsPage;

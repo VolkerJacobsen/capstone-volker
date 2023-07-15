@@ -1,6 +1,6 @@
 import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 
-const EnvironmentPage = (projects) => {
+const CommunityPage = (projects) => {
   const environmentProjects = projects.filter(
     (project) => project.category === "Community"
   );
@@ -24,4 +24,4 @@ const EnvironmentPage = (projects) => {
   );
 };
 
-export default EnvironmentPage;
+export default CommunityPage;
