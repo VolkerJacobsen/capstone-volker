@@ -1,6 +1,6 @@
-import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
+import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 
-const EnvironmentPage = (projects) => {
+const EnvironmentPage = ({ projects }) => {
   const environmentProjects = projects.filter(
     (project) => project.category === "Environment"
   );

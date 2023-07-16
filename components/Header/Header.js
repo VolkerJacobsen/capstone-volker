@@ -37,11 +37,11 @@ export default function Header() {
   const currentPath = router.pathname;
 
   function handleCategoryChange(event) {
-    const category = event.target.value;
-    if (category) {
-      router.push(`/§{category}`);
-    } else {
+    const selectedCategory = event.target.value;
+    if (selectedCategory === "/") {
       router.push("/");
+    } else {
+      router.push(`/category${selectedCategory}`);
     }
   }
 

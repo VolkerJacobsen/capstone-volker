@@ -1,14 +1,14 @@
-import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
+import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 
-const PoliticsPage = (projects) => {
-  const environmentProjects = projects.filter(
+const PoliticsPage = ({ projects }) => {
+  const politicsProjects = projects.filter(
     (project) => project.category === "Politics"
   );
 
   return (
     <div>
       <h1>Political Projects</h1>
-      {environmentProjects.map((project) => (
+      {politicsProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview
             category={project.category}

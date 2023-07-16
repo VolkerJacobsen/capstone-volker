@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ProjectForm from "../components/ProjectForm/ProjectForm.js";
 import { useState } from "react";
 import { projects as initialProjects } from "../utils/data";
-import { useRouter } from "next/router";
 
 const HeaderText = styled.h1`
   position: relative;
@@ -11,17 +10,7 @@ const HeaderText = styled.h1`
 `;
 
 export default function HomePage() {
-  const router = useRouter();
   const [projectList, setProjectList] = useState(initialProjects);
-
-  function handleCategoryChange(event) {
-    const category = event.target.value;
-    if (category) {
-      router.push(`/§{category}`);
-    } else {
-      router.push("/");
-    }
-  }
 
   function handleAddProject(newProject) {
     const updatedProjectList = [
