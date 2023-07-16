@@ -55,6 +55,7 @@ export default function Header() {
       />
       <StyledSelect
         name="category"
+        value={currentPath}
         id="category"
         onChange={handleCategoryChange}
       >
