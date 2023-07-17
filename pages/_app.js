@@ -1,24 +1,16 @@
 import GlobalStyle from "../styles";
+import Layout from "@/components/Layout/Layout";
 import { projects } from "../utils/data";
-import styled from "styled-components";
-
-const Device = styled.div`
-  position: relative;
-  display: block;
-  width: 368px;
-  height: 100vh;
-  overflow: auto;
-`;
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   return (
     <>
-      <Device>
-        <GlobalStyle />
-        <main>
-          <Component {...pageProps} projects={projects} />
-        </main>
-      </Device>
+      <GlobalStyle />
+      <Layout>
+        <Component {...pageProps} projects={projects} router={router} />
+      </Layout>
     </>
   );
 }
