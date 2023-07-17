@@ -1,17 +1,15 @@
 import ProjectList from "../components/ProjectList/ProjectList.js";
-import styled from "styled-components";
-import ProjectForm from "../components/ProjectForm/ProjectForm.js";
 import { useState } from "react";
 import { projects as initialProjects } from "../utils/data";
-import Link from "next/link.js";
+import styled from "styled-components";
+import ProjectForm from "../components/ProjectForm/ProjectForm.js";
 
 const HeaderText = styled.h1`
   position: relative;
   justify-self: center;
 `;
 
-const StyledAddProjectLink = styled(Link)`
-  text-decoration: none;
+const StyledButton = styled.button`
   color: #fff;
   font-size: 1.1em;
   border-radius: 100px 100px 100px 100px;
@@ -19,7 +17,7 @@ const StyledAddProjectLink = styled(Link)`
   padding: 10px 30px;
   cursor: pointer;
   background-color: #f18d9e;
-  margin: 20px 75px 10px 75px;
+  margin: 20px 20px 10px 50px;
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   display: flex;
   justify-content: center;
@@ -32,6 +30,11 @@ const StyledAddProjectLink = styled(Link)`
 
 export default function HomePage() {
   const [projectList, setProjectList] = useState(initialProjects);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
 
   function handleAddProject(newProject) {
     const updatedProjectList = [
@@ -44,9 +47,8 @@ export default function HomePage() {
   return (
     <>
       <HeaderText>List of projects</HeaderText>
-      <StyledAddProjectLink href="/projectform">
-        + Add your project
-      </StyledAddProjectLink>
+      <StyledButton onClick={handleShowForm}>+ Add your project</StyledButton>
+      {showForm && <ProjectForm onAddProject={handleAddProject} />}
       <ProjectList projects={projectList} />
     </>
   );

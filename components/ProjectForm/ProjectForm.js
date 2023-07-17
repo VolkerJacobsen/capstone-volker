@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
 
 const Form = styled.form`
   background-color: #faf8f7;
@@ -9,11 +8,9 @@ const Form = styled.form`
   margin-bottom: 20px;
   border-radius: 5%;
 `;
-
 const Fieldset = styled.fieldset`
   border: none;
 `;
-
 const SubmitButton = styled.button`
   color: #fff;
   font-size: 1.1em;
@@ -26,13 +23,11 @@ const SubmitButton = styled.button`
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   display: flex;
   justify-content: center;
-
   &:hover {
     background-color: #d67c8c;
     color: black;
   }
 `;
-
 const Input = styled.input`
   padding: 10px;
   font-size: 16px;
@@ -41,7 +36,6 @@ const Input = styled.input`
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   width: 100%;
 `;
-
 const Textarea = styled.textarea`
   padding: 10px;
   font-size: 16px;
@@ -51,7 +45,6 @@ const Textarea = styled.textarea`
   width: 100%;
   font-family: system-ui;
 `;
-
 const Select = styled.select`
   padding: 10px;
   font-size: 16px;
@@ -60,18 +53,12 @@ const Select = styled.select`
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   margin-left: 30px;
 `;
-
 export default function ProjectForm({ onAddProject }) {
   const [imageFile, setImageFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(
-    "/../../assets/images/placeholder-image.png"
-  );
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -80,35 +67,22 @@ export default function ProjectForm({ onAddProject }) {
       };
       reader.readAsDataURL(imageFile);
     } else {
+      data.imageSource = "/placeholder-image.jpg";
       onAddProject(data);
     }
-
     event.target.reset();
-    setPreviewImage("/../../assets/images/placeholder-image.png");
     alert("You have successfully submitted your project!");
   };
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImageFile(file);
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setPreviewImage("/../../assets/images/placeholder-image.png");
-    }
   };
-
   return (
     <div>
       <h1>Publish your project</h1>
       <Form onSubmit={handleSubmit}>
         <Fieldset>
-          <label>
+          <label htmlFor="name">
             <p>Title: </p>
             <Input
               name="title"
@@ -116,21 +90,11 @@ export default function ProjectForm({ onAddProject }) {
               minLength="5"
               maxLength="20"
               id="title"
-              placeholder="Enter your project title"
               required
+              placeholder="Enter your project title"
             />
           </label>
-          <div>
-            <Image
-              id="placeholder-image"
-              src={previewImage}
-              alt="placeholder image"
-              width={670}
-              height={400}
-              hidden
-            />
-          </div>
-          <label>
+          <label htmlFor="imageSource">
             <p>Image: </p>
             <input
               type="file"
@@ -138,10 +102,9 @@ export default function ProjectForm({ onAddProject }) {
               id="imageSource"
               accept="image/*"
               onChange={handleImageChange}
-              required
             />
           </label>
-          <label>
+          <label htmlFor="shortDescription">
             <p>Short description: </p>
             <Textarea
               name="shortDescription"
@@ -152,7 +115,7 @@ export default function ProjectForm({ onAddProject }) {
               placeholder="Enter a short description. Max. 100 characters."
             />
           </label>
-          <label>
+          <label htmelFor="longDescription">
             <p>Long description: </p>
             <Textarea
               name="longDescription"
@@ -165,15 +128,13 @@ export default function ProjectForm({ onAddProject }) {
           </label>
           <br />
           <br />
-          <label>
-            Select a category:
-            <Select name="category" id="category" required>
-              <option value="Community">Community</option>
-              <option value="Environment">Environment</option>
-              <option value="Politics">Politics</option>
-            </Select>
-          </label>
-          <label>
+          <label htmlFor="category">Select a category: </label>
+          <Select name="category" id="category" required>
+            <option value="Community">Community</option>
+            <option value="Environment">Environment</option>
+            <option value="Politics">Politics</option>
+          </Select>
+          <label htmlFor="organizer">
             <p>Organizer: </p>
             <Input
               type="text"
@@ -183,7 +144,7 @@ export default function ProjectForm({ onAddProject }) {
               placeholder="Enter your organization"
             />
           </label>
-          <label>
+          <label htmlFor="contact">
             <p>Contact email: </p>
             <Input
               name="contact"
