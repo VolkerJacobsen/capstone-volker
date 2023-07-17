@@ -53,7 +53,7 @@ const Select = styled.select`
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   margin-left: 30px;
 `;
-export default function ProjectForm({ onAddProject }) {
+export default function ProjectForm({ onAddProject, onCloseForm }) {
   const [imageFile, setImageFile] = useState(null);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -72,6 +72,7 @@ export default function ProjectForm({ onAddProject }) {
     }
     event.target.reset();
     alert("You have successfully submitted your project!");
+    onCloseForm();
   };
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -79,7 +80,6 @@ export default function ProjectForm({ onAddProject }) {
   };
   return (
     <div>
-      <h1>Publish your project</h1>
       <Form onSubmit={handleSubmit}>
         <Fieldset>
           <label htmlFor="name">
