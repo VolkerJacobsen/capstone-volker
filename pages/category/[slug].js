@@ -14,12 +14,8 @@ export default function ProjectDetailsPage({ projects }) {
   }
   const category = currentProject.category;
 
-  console.log(slug);
-  console.log(category);
-  console.log(currentProject);
-
   return (
-    <div>
+    <span>
       {category === "Environment" && (
         <div>
           <h2>Environment Project</h2>
@@ -38,6 +34,6 @@ export default function ProjectDetailsPage({ projects }) {
           <ProjectDetail project={currentProject} />
         </div>
       )}
-    </div>
+    </span>
   );
 }

@@ -8,7 +8,6 @@ const ProjectContainer = styled.div`
   padding: 0 10px 10px 10px;
   margin-bottom: 20px;
   border-radius: 5%;
-  border-left-style: #a7c7e7 5px solid;
 `;
 
 const StyledImage = styled(Image)`

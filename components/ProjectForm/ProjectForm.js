@@ -55,6 +55,7 @@ const Select = styled.select`
 `;
 export default function ProjectForm({ onAddProject, onCloseForm }) {
   const [imageFile, setImageFile] = useState(null);
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -78,11 +79,15 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
     const file = event.target.files[0];
     setImageFile(file);
   };
+
+  function openSelectOptions() {
+    setIsSelectOpen(true);
+  }
   return (
     <div>
       <Form onSubmit={handleSubmit}>
         <Fieldset>
-          <label htmlFor="name">
+          <label htmlFor="title">
             <p>Title: </p>
             <Input
               name="title"
@@ -115,7 +120,7 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
               placeholder="Enter a short description. Max. 100 characters."
             />
           </label>
-          <label htmelFor="longDescription">
+          <label htmlFor="longDescription">
             <p>Long description: </p>
             <Textarea
               name="longDescription"
@@ -128,14 +133,16 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           </label>
           <br />
           <br />
-          <label htmlFor="category">Select a category: </label>
-          <Select name="category" id="category" required>
+          <label htmlFor="category_form" onClick={openSelectOptions}>
+            Select a category:{" "}
+          </label>
+          <Select name="category" id="category_form" required={isSelectOpen}>
             <option value="Community">Community</option>
             <option value="Environment">Environment</option>
             <option value="Politics">Politics</option>
           </Select>
           <label htmlFor="organizer">
-            <p>Organizer: </p>
+            <p>Organizer:</p>
             <Input
               type="text"
               name="organizer"
