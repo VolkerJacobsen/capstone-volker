@@ -7,7 +7,7 @@ const CommunityPage = ({ projects }) => {
 
   return (
     <div>
-      <h1>Communtiy Projects</h1>
+      <h2>Communtiy Projects</h2>
       {communityProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

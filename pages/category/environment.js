@@ -7,7 +7,7 @@ const EnvironmentPage = ({ projects }) => {
 
   return (
     <div>
-      <h1>Environment Projects</h1>
+      <h2>Environment Projects</h2>
       {environmentProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

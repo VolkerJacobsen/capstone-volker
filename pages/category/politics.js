@@ -7,7 +7,7 @@ const PoliticsPage = ({ projects }) => {
 
   return (
     <div>
-      <h1>Political Projects</h1>
+      <h2>Political Projects</h2>
       {politicsProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview
