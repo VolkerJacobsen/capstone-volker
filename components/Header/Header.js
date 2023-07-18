@@ -19,6 +19,7 @@ const StyledSelect = styled.select`
   text-align: center;
   font-size: 1.2rem;
   margin-left: 20px;
+  margin-bottom: 10px;
   color: #fff;
   border-radius: 100px 100px 100px 100px;
   border: 0;
@@ -50,8 +51,8 @@ export default function Header() {
       <StyledImage
         alt="Logo getInvolved"
         src="/Logo.png"
-        width={180}
-        height={110}
+        width={160}
+        height={102}
       />
       <StyledSelect
         name="category"
