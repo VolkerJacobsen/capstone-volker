@@ -11,9 +11,15 @@ const ContentContainer = styled.div`
 `;
 
 const StyledImage = styled(Image)`
+  margin-top: 10px;
   height: 100%;
   width: 100%;
   border-radius: 5%;
+`;
+
+const HeaderText = styled.h1`
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledLink = styled(Link)`
@@ -24,7 +30,7 @@ const StyledLink = styled(Link)`
 export default function AboutUs() {
   return (
     <>
-      <h1>About Us</h1>
+      <HeaderText>About Us</HeaderText>
       <ContentContainer>
         <StyledImage
           src="/about-us.jpg"
@@ -32,19 +38,27 @@ export default function AboutUs() {
           width={670}
           height={400}
         ></StyledImage>
-        <p>
-          getInvolved is a community app where you can find detailed information
-          about non-profit organizations in the Berlin area, where you can
-          register for specific projects but also where you can start your own
-          initiative. Founded in 2023, we are still in our infancy, but we are
-          firmly convinced that we are stronger together. Especially in a big
-          city like Berlin, which can seem cold and harsh, we should approach
-          each other and support each other. Inclusion is a matter close to our
-          hearts. For this reason, we welcome everyone, regardless of origin,
-          gender or sexual orientation. We also expect this openness from our
-          users. If you want to know more about us, have same feedback or want
-          to engage with us please contact us.
-        </p>
+        <section>
+          <p>
+            <strong>getInvolved</strong> is a community app where you can find
+            detailed information about non-profit organizations in the Berlin
+            area, where you can register for specific projects but also where
+            you can start your own initiative.
+          </p>
+          <p>
+            Founded in 2023, we are still in our infancy, but we are firmly
+            convinced that we are stronger together. Especially in a big city
+            like Berlin, which can seem cold and harsh, we should approach and
+            support each other.
+          </p>
+          <p>
+            Inclusion is a matter close to our hearts. For this reason, we
+            welcome everyone, regardless of origin, gender or sexual
+            orientation. We also expect this openness from our users. If you
+            want to know more about us, have same feedback or want to engage
+            with us please don´t hesitate to reach out to us.
+          </p>
+        </section>
       </ContentContainer>
     </>
   );

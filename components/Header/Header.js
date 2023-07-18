@@ -81,8 +81,8 @@ export default function Header() {
         <StyledImage
           alt="Logo getInvolved"
           src="/Logo.png"
-          width={160}
-          height={102}
+          width={140}
+          height={89}
         />
         <StyledButtonContainer>
           <StyledSelect
