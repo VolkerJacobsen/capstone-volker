@@ -33,7 +33,7 @@ export default function HomePage() {
   const [showForm, setShowForm] = useState(false);
 
   const handleShowForm = () => {
-    setShowForm(true);
+    setShowForm(!showForm);
   };
 
   function handleAddProject(newProject) {
