@@ -1,4 +1,10 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
+import styled from "styled-components";
+
+const HeaderText = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
 
 const CommunityPage = ({ projects }) => {
   const communityProjects = projects.filter(
@@ -7,7 +13,7 @@ const CommunityPage = ({ projects }) => {
 
   return (
     <div>
-      <h2>Communtiy Projects</h2>
+      <HeaderText>Community Projects</HeaderText>
       {communityProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

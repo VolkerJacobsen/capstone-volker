@@ -1,4 +1,10 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
+import styled from "styled-components";
+
+const HeaderText = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
 
 const PoliticsPage = ({ projects }) => {
   const politicsProjects = projects.filter(
@@ -7,7 +13,7 @@ const PoliticsPage = ({ projects }) => {
 
   return (
     <div>
-      <h2>Political Projects</h2>
+      <HeaderText>Political Projects</HeaderText>
       {politicsProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

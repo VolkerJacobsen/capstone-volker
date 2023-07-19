@@ -12,15 +12,16 @@ const HeaderText = styled.h1`
 const StyledButton = styled.button`
   color: #fff;
   font-size: 1.1em;
-  border-radius: 100px 100px 100px 100px;
+  border-radius: 100px;
   border: 0;
   padding: 10px 20px;
   cursor: pointer;
   background-color: #f18d9e;
-  margin: 0 20px 20px 95px;
+  margin: 0 auto 20px;
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   display: flex;
   justify-content: center;
+  align-self: center;
 
   &:hover {
     background-color: #d67c8c;

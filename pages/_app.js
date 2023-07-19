@@ -9,8 +9,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
+      <Navbar />
       <Layout>
-        <Navbar />
         <Component {...pageProps} projects={projects} router={router} />
       </Layout>
     </>
