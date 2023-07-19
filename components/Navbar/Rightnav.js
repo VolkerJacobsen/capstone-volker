@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Ul = styled.ul`
   list-style: none;
@@ -34,6 +35,13 @@ const StyledLink = styled.a`
 
 const RightNav = (props) => {
   const { open, setOpen } = props;
+  const router = useRouter();
+
+  const handleCategoryChange = (event) => {
+    const selectedCategory = event.target.value;
+    router.push(`/category/${selectedCategory}`);
+    setOpen(false);
+  };
 
   return (
     <Ul open={open}>
@@ -48,25 +56,17 @@ const RightNav = (props) => {
         </Link>
       </li>
       <li>
-        <Link href="/category/community" passHref legacyBehavior>
-          <StyledLink onClick={() => setOpen(!open)}>
-            Community projects
-          </StyledLink>
-        </Link>
-      </li>
-      <li>
-        <Link href="/category/environment" passHref legacyBehavior>
-          <StyledLink onClick={() => setOpen(!open)}>
-            Environmental projects
-          </StyledLink>
-        </Link>
-      </li>
-      <li>
-        <Link href="/category/politics" passHref legacyBehavior>
-          <StyledLink onClick={() => setOpen(!open)}>
-            Political projects
-          </StyledLink>
-        </Link>
+        <label htmlFor="category-select">Select Category:</label>
+        <select
+          id="category-select"
+          onChange={handleCategoryChange}
+          value={router.query.category || ""}
+        >
+          <option value="">All</option>
+          <option value="community">Community projects</option>
+          <option value="environment">Environmental projects</option>
+          <option value="politics">Political projects</option>
+        </select>
       </li>
     </Ul>
   );
