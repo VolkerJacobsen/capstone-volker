@@ -13,7 +13,7 @@ const CommunityPage = ({ projects }) => {
 
   return (
     <div>
-      <HeaderText>Community Projects</HeaderText>
+      <HeaderText>Community projects</HeaderText>
       {communityProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

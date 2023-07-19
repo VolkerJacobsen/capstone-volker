@@ -13,7 +13,7 @@ const PoliticsPage = ({ projects }) => {
 
   return (
     <div>
-      <HeaderText>Political Projects</HeaderText>
+      <HeaderText>Political projects</HeaderText>
       {politicsProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

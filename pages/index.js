@@ -22,12 +22,23 @@ const HeaderText = styled.h1`
   justify-content: center;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
+const ContactContainer = styled.section`
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const EmailLink = styled.a`
+  text-decoration: underline;
+  color: #f18d9e;
+  cursor: pointer;
 `;
 
 export default function AboutUs() {
+  const handleEmailClick = () => {
+    window.location.href = "mailto:info@getinvolved.com";
+  };
+
   return (
     <>
       <HeaderText>About Us</HeaderText>
@@ -56,9 +67,15 @@ export default function AboutUs() {
             welcome everyone, regardless of origin, gender or sexual
             orientation. We also expect this openness from our users. If you
             want to know more about us, have same feedback or want to engage
-            with us please don´t hesitate to reach out to us.
+            with us please don´t hesitate to{" "}
+            <EmailLink onClick={handleEmailClick}>contact</EmailLink> us.
           </p>
         </section>
+        <ContactContainer>
+          <p>
+            <strong>email: </strong> info@getinvolved.com
+          </p>
+        </ContactContainer>
       </ContentContainer>
     </>
   );
