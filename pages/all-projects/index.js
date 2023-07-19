@@ -7,6 +7,7 @@ import ProjectForm from "../../components/ProjectForm/ProjectForm";
 const HeaderText = styled.h1`
   display: flex;
   justify-content: center;
+  margin-bottom: 15px;
 `;
 
 const StyledButton = styled.button`
@@ -17,7 +18,7 @@ const StyledButton = styled.button`
   padding: 10px 20px;
   cursor: pointer;
   background-color: #f18d9e;
-  margin: 0 auto 20px;
+  margin: 0 auto 30px;
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   display: flex;
   justify-content: center;
@@ -52,7 +53,7 @@ export default function HomePage() {
   return (
     <>
       <HeaderText>List of projects</HeaderText>
-      <StyledButton onClick={handleShowForm}>+ Add your project</StyledButton>
+      <StyledButton onClick={handleShowForm}>+ ADD PROJECT</StyledButton>
       {showForm && (
         <ProjectForm
           onAddProject={handleAddProject}

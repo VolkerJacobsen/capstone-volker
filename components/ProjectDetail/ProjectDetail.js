@@ -1,5 +1,12 @@
 import Image from "next/image";
 import styled from "styled-components";
+import StyledBack from "../StyledBackButton/StyledBackButton.js";
+
+const HeaderText = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
+`;
 
 const ProjectContainer = styled.div`
   background-color: #faf8f7;
@@ -7,12 +14,27 @@ const ProjectContainer = styled.div`
   padding: 0 10px 10px 10px;
   margin-bottom: 20px;
   border-radius: 5%;
+  border: 5px solid #a7c7e7;
+  border-style: none none solid solid;
+
+  .category {
+    font-size: 20px;
+    position: relative;
+    bottom: 12px;
+    left: 25px;
+  }
 `;
 
 const StyledImage = styled(Image)`
   height: 100%;
   width: 100%;
   border-radius: 5%;
+`;
+
+const StyledBackButton = styled.button`
+  background-color: white;
+  border: none;
+  margin: 20px;
 `;
 
 export default function ProjectDetail({
@@ -27,11 +49,10 @@ export default function ProjectDetail({
 }) {
   return (
     <div>
-      <button type="button" onClick={() => history.back()}>
-        Back
-      </button>
+      <StyledBack />
+      <HeaderText>Detailpage</HeaderText>
       <ProjectContainer>
-        <p>{category}</p>
+        <p className="category">{category}</p>
         <h2>{title}</h2>
         <p>{organizer}</p>
         <StyledImage

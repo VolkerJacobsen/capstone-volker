@@ -1,9 +1,11 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 import styled from "styled-components";
+import StyledBack from "../../components/StyledBackButton/StyledBackButton.js";
 
 const HeaderText = styled.h1`
   display: flex;
   justify-content: center;
+  margin-top: -30px;
 `;
 
 const PoliticsPage = ({ projects }) => {
@@ -13,6 +15,7 @@ const PoliticsPage = ({ projects }) => {
 
   return (
     <div>
+      <StyledBack />
       <HeaderText>Political projects</HeaderText>
       {politicsProjects.map((project) => (
         <div key={project.id}>

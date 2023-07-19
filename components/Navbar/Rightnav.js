@@ -22,8 +22,10 @@ const Ul = styled.ul`
     width: 300px;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
+    z-index: 2;
 
     li {
+      position: relative;
       color: #fff;
     }
   }
@@ -53,6 +55,11 @@ const RightNav = (props) => {
       <li>
         <Link href="/all-projects" passHref legacyBehavior>
           <StyledLink onClick={() => setOpen(!open)}>All projects</StyledLink>
+        </Link>
+      </li>
+      <li>
+        <Link href="/favorites" passHref legacyBehavior>
+          <StyledLink onClick={() => setOpen(!open)}>My favorites</StyledLink>
         </Link>
       </li>
       <li>

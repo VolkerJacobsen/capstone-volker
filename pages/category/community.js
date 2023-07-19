@@ -1,9 +1,11 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 import styled from "styled-components";
+import StyledBack from "../../components/StyledBackButton/StyledBackButton";
 
 const HeaderText = styled.h1`
   display: flex;
   justify-content: center;
+  margin-top: -30px;
 `;
 
 const CommunityPage = ({ projects }) => {
@@ -13,6 +15,7 @@ const CommunityPage = ({ projects }) => {
 
   return (
     <div>
+      <StyledBack />
       <HeaderText>Community projects</HeaderText>
       {communityProjects.map((project) => (
         <div key={project.id}>
