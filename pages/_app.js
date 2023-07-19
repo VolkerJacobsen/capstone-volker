@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <FavoriteProvider>
-        <Navbar />
         <Layout>
+          <Navbar />
           <Component {...pageProps} projects={projects} router={router} />
         </Layout>
       </FavoriteProvider>
