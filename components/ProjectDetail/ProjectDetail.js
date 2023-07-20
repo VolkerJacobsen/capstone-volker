@@ -1,6 +1,8 @@
 import Image from "next/image";
 import styled from "styled-components";
 import StyledBack from "../StyledBackButton/StyledBackButton.js";
+import CommentSection from "../CommentSection/CommentSection.js";
+import { useState } from "react";
 
 const HeaderText = styled.h1`
   display: flex;
@@ -31,10 +33,36 @@ const StyledImage = styled(Image)`
   border-radius: 5%;
 `;
 
-const StyledBackButton = styled.button`
-  background-color: white;
-  border: none;
-  margin: 20px;
+const StyledButton = styled.button`
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100%;
+
+  color: #fff;
+  border-radius: 100px 100px 100px 100px;
+  border: 0;
+  cursor: pointer;
+  background-color: #5bc8ac;
+  box-shadow: 1px 1px 1px 1px rgb(204 203 203);
+
+  &:hover {
+    background-color: #d67c8c;
+    color: black;
+  }
+`;
+
+const StyledButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const CommentFormContainer = styled.div`
+  width: 100%;
 `;
 
 export default function ProjectDetail({
@@ -47,23 +75,48 @@ export default function ProjectDetail({
     contact,
   },
 }) {
-  return (
-    <div>
-      <StyledBack />
-      <HeaderText>Detailpage</HeaderText>
-      <ProjectContainer>
-        <p className="category">{category}</p>
-        <h2>{title}</h2>
-        <p>{organizer}</p>
-        <StyledImage
-          alt={`Photo ${title} by ${organizer}`}
-          src={require(`/assets/images/${imageSource}`).default}
-          width={670}
-          height={400}
-        />
-        <p>{longDescription}</p>
-        <p>{contact}</p>
-      </ProjectContainer>
-    </div>
-  );
+  const [showCommentForm, setShowCommentForm] = useState(false);
+
+  const handleShowCommentForm = () => {
+    setShowCommentForm(!showCommentForm);
+  };
+
+  const handleCloseCommentForm = () => {
+    setShowCommentForm(false);
+  };
+  {
+    return (
+      <div>
+        <StyledBack />
+        <HeaderText>Detailpage</HeaderText>
+        <ProjectContainer>
+          <p className="category">{category}</p>
+          <h2>{title}</h2>
+          <p>{organizer}</p>
+          <StyledImage
+            alt={`Photo ${title} by ${organizer}`}
+            src={require(`/assets/images/${imageSource}`).default}
+            width={670}
+            height={400}
+          />
+          <p>{longDescription}</p>
+          <p>{contact}</p>
+          <StyledButtonContainer>
+            <StyledButton className="contact">Contact us</StyledButton>
+            <StyledButton
+              className="comment_form"
+              onClick={handleShowCommentForm}
+            >
+              Leave a note
+            </StyledButton>
+          </StyledButtonContainer>
+          {showCommentForm && (
+            <CommentFormContainer>
+              <CommentSection onCloseCommentForm={handleCloseCommentForm} />
+            </CommentFormContainer>
+          )}
+        </ProjectContainer>
+      </div>
+    );
+  }
 }
