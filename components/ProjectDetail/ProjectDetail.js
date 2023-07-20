@@ -65,6 +65,14 @@ const CommentFormContainer = styled.div`
   width: 100%;
 `;
 
+const StyledLink = styled.a`
+  text-decoration: none;
+  color: white;
+  &:hover {
+    color: black;
+  }
+`;
+
 export default function ProjectDetail({
   project: {
     category,
@@ -76,6 +84,7 @@ export default function ProjectDetail({
   },
 }) {
   const [showCommentForm, setShowCommentForm] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const handleShowCommentForm = () => {
     setShowCommentForm(!showCommentForm);
@@ -84,6 +93,11 @@ export default function ProjectDetail({
   const handleCloseCommentForm = () => {
     setShowCommentForm(false);
   };
+
+  const handleAddComment = (newComment) => {
+    setComments([...comments, newComment]);
+  };
+
   {
     return (
       <div>
@@ -100,19 +114,21 @@ export default function ProjectDetail({
             height={400}
           />
           <p>{longDescription}</p>
-          <p>{contact}</p>
           <StyledButtonContainer>
-            <StyledButton className="contact">Contact us</StyledButton>
-            <StyledButton
-              className="comment_form"
-              onClick={handleShowCommentForm}
-            >
+            <StyledButton>
+              <StyledLink href={`mailto:${contact}`}>Contact us</StyledLink>
+            </StyledButton>
+            <StyledButton onClick={handleShowCommentForm}>
               Leave a note
             </StyledButton>
           </StyledButtonContainer>
           {showCommentForm && (
             <CommentFormContainer>
-              <CommentSection onCloseCommentForm={handleCloseCommentForm} />
+              <CommentSection
+                comments={comments}
+                onAddComment={handleAddComment}
+                onCloseCommentForm={handleCloseCommentForm}
+              />
             </CommentFormContainer>
           )}
         </ProjectContainer>
