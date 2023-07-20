@@ -96,7 +96,7 @@ export default function ProjectPreview({
           <p className="category">{category}</p>
           <h2>{title}</h2>
           <StyledImage
-            src={`/assets/images/${imageSource}`}
+            src={require(`/assets/images/${imageSource}`).default}
             alt={`Photo ${title} by ${organizer}`}
             width={670}
             height={400}
