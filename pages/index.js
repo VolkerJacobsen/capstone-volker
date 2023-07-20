@@ -1,64 +1,82 @@
-import ProjectList from "../components/ProjectList/ProjectList.js";
-import { useState } from "react";
-import { projects as initialProjects } from "../utils/data";
+import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
-import ProjectForm from "../components/ProjectForm/ProjectForm.js";
+
+const ContentContainer = styled.div`
+  background-color: #faf8f7;
+  margin-left: 20px;
+  padding: 0 10px 10px 10px;
+  margin-bottom: 20px;
+  border-radius: 5%;
+`;
+
+const StyledImage = styled(Image)`
+  margin-top: 10px;
+  height: 100%;
+  width: 100%;
+  border-radius: 5%;
+`;
 
 const HeaderText = styled.h1`
   display: flex;
   justify-content: center;
 `;
 
-const StyledButton = styled.button`
-  color: #fff;
-  font-size: 1.1em;
-  border-radius: 100px 100px 100px 100px;
-  border: 0;
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: #f18d9e;
-  margin: 0 20px 20px 95px;
-  box-shadow: 1px 1px 1px 1px rgb(204 203 203);
+const ContactContainer = styled.section`
+  margin-top: 20px;
   display: flex;
-  justify-content: center;
-
-  &:hover {
-    background-color: #d67c8c;
-    color: black;
-  }
+  flex-direction: column;
 `;
 
-export default function HomePage() {
-  const [projectList, setProjectList] = useState(initialProjects);
-  const [showForm, setShowForm] = useState(false);
+const EmailLink = styled.a`
+  text-decoration: underline;
+  color: #f18d9e;
+  cursor: pointer;
+`;
 
-  const handleShowForm = () => {
-    setShowForm(!showForm);
-  };
-
-  function handleAddProject(newProject) {
-    const updatedProjectList = [
-      { id: String(projectList.length + 1), ...newProject },
-      ...projectList,
-    ];
-    setProjectList(updatedProjectList);
-  }
-
-  const handleCloseForm = () => {
-    setShowForm(false);
+export default function AboutUs() {
+  const handleEmailClick = () => {
+    window.location.href = "mailto:info@getinvolved.com";
   };
 
   return (
     <>
-      <HeaderText>List of projects</HeaderText>
-      <StyledButton onClick={handleShowForm}>+ Add your project</StyledButton>
-      {showForm && (
-        <ProjectForm
-          onAddProject={handleAddProject}
-          onCloseForm={handleCloseForm}
-        />
-      )}
-      <ProjectList projects={projectList} />
+      <HeaderText>About Us</HeaderText>
+      <ContentContainer>
+        <StyledImage
+          src="/about-us.jpg"
+          alt="About us photo"
+          width={670}
+          height={400}
+        ></StyledImage>
+        <section>
+          <p>
+            <strong>getInvolved</strong> is a community app where you can find
+            detailed information about non-profit organizations in the Berlin
+            area, where you can register for specific projects but also where
+            you can start your own initiative.
+          </p>
+          <p>
+            Founded in 2023, we are still in our infancy, but we are firmly
+            convinced that we are stronger together. Especially in a big city
+            like Berlin, which can seem cold and harsh, we should approach and
+            support each other.
+          </p>
+          <p>
+            Inclusion is a matter close to our hearts. For this reason, we
+            welcome everyone, regardless of origin, gender or sexual
+            orientation. We also expect this openness from our users. If you
+            want to know more about us, have same feedback or want to engage
+            with us please don´t hesitate to{" "}
+            <EmailLink onClick={handleEmailClick}>contact</EmailLink> us.
+          </p>
+        </section>
+        <ContactContainer>
+          <p>
+            <strong>email: </strong> info@getinvolved.com
+          </p>
+        </ContactContainer>
+      </ContentContainer>
     </>
   );
 }

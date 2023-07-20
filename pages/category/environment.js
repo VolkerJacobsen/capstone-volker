@@ -1,4 +1,12 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
+import styled from "styled-components";
+import StyledBack from "../../components/StyledBackButton/StyledBackButton";
+
+const HeaderText = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+`;
 
 const EnvironmentPage = ({ projects }) => {
   const environmentProjects = projects.filter(
@@ -7,7 +15,8 @@ const EnvironmentPage = ({ projects }) => {
 
   return (
     <div>
-      <h1>Environment Projects</h1>
+      <StyledBack />
+      <HeaderText>Environmental projects</HeaderText>
       {environmentProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview

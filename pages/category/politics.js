@@ -1,4 +1,12 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
+import styled from "styled-components";
+import StyledBack from "../../components/StyledBackButton/StyledBackButton.js";
+
+const HeaderText = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+`;
 
 const PoliticsPage = ({ projects }) => {
   const politicsProjects = projects.filter(
@@ -7,7 +15,8 @@ const PoliticsPage = ({ projects }) => {
 
   return (
     <div>
-      <h1>Political Projects</h1>
+      <StyledBack />
+      <HeaderText>Political projects</HeaderText>
       {politicsProjects.map((project) => (
         <div key={project.id}>
           <ProjectPreview
