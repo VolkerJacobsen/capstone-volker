@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
+import ReplyItem from "../ReplyItem/ReplyItem";
 
 const CommentSectionContainer = styled.div`
   margin: 20px 0 20px 0;
@@ -80,6 +81,10 @@ const CommentItem = styled.li`
   list-style-type: none;
 `;
 
+const ReplyFormContainer = styled.div`
+  margin-left: 30px;
+`;
+
 export default function CommentSection({
   comments,
   onAddComment,
@@ -92,7 +97,13 @@ export default function CommentSection({
   setContent,
   editingCommentId,
   setEditingCommentId,
+  onReplySubmit,
+  replyingTo,
+  setReplyingTo,
 }) {
+  const [replyAuthor, setReplyAuthor] = useState("");
+  const [replyContent, setReplyContent] = useState("");
+
   const handleContentChange = (event) => {
     setContent(event.target.value);
   };
@@ -130,7 +141,38 @@ export default function CommentSection({
   };
 
   const handleDeleteButtonClick = (commentId) => {
-    onDeleteComment(commentId); // Call the onDeleteComment function from props
+    onDeleteComment(commentId);
+  };
+
+  const handleReplyClick = (commentId) => {
+    setReplyingTo((prevReplyingTo) =>
+      prevReplyingTo === commentId ? null : commentId
+    );
+    setReplyAuthor("");
+    setReplyContent("");
+  };
+
+  const handleSubmitReply = (event) => {
+    event.preventDefault();
+    if (replyAuthor.trim() === "" || replyContent.trim() === "") {
+      return;
+    }
+
+    const newReply = {
+      id: uuidv4(),
+      author: replyAuthor,
+      content: replyContent,
+      timestamp: new Date().toISOString(),
+    };
+
+    console.log("Parent Comment ID (replyingTo):", replyingTo);
+    console.log("New Reply:", newReply);
+
+    onReplySubmit(replyingTo, newReply);
+
+    setReplyAuthor("");
+    setReplyContent("");
+    setReplyingTo(null);
   };
 
   return (
@@ -186,6 +228,13 @@ export default function CommentSection({
                   {new Date(comment.timestamp).toLocaleString()}
                 </p>
                 <p>{comment.content}</p>
+                {comment.replies && comment.replies.length > 0 && (
+                  <div>
+                    {comment.replies.map((reply) => (
+                      <ReplyItem key={reply.id} reply={reply} />
+                    ))}
+                  </div>
+                )}
               </CommentContainer>
               <ButtonContainer>
                 <StyledButton
@@ -200,7 +249,52 @@ export default function CommentSection({
                 >
                   Delete
                 </StyledButton>
+                <StyledButton
+                  type="button"
+                  onClick={() => handleReplyClick(comment.id)}
+                >
+                  Reply
+                </StyledButton>
               </ButtonContainer>
+              {replyingTo === comment.id && (
+                <ReplyFormContainer>
+                  <CommentForm onSubmit={handleSubmitReply}>
+                    <h2>Reply to {comment.author}</h2>
+                    <label htmlFor="replyAuthor">Your Name: </label>
+                    <StyledInput
+                      type="text"
+                      id="replyAuthor"
+                      value={replyAuthor}
+                      required
+                      onChange={(event) => setReplyAuthor(event.target.value)}
+                    />
+                    <StyledTextAreaContainer>
+                      <label htmlFor="replyContent">Comment: </label>
+                      <Textarea
+                        value={replyContent}
+                        onChange={(event) =>
+                          setReplyContent(event.target.value)
+                        }
+                        name="content"
+                        id="content"
+                        minLength="10"
+                        maxLength="100"
+                        required
+                        placeholder="Enter your comment/remarks. Max. 100 characters."
+                      />
+                    </StyledTextAreaContainer>
+                    <ButtonContainer>
+                      <StyledButton type="submit">Reply</StyledButton>
+                      <StyledButton
+                        type="button"
+                        onClick={() => setReplyingTo(null)}
+                      >
+                        Cancel
+                      </StyledButton>
+                    </ButtonContainer>
+                  </CommentForm>
+                </ReplyFormContainer>
+              )}
             </CommentItem>
           ))}
         </CommentList>

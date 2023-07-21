@@ -88,6 +88,7 @@ export default function ProjectDetail({
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
+  const [replyingTo, setReplyingTo] = useState(null);
 
   const handleShowCommentForm = () => {
     setShowCommentForm((prevState) => !prevState);
@@ -133,6 +134,18 @@ export default function ProjectDetail({
     }
   };
 
+  const handleReplySubmit = (commentId, newReply) => {
+    const updatedComments = comments.map((comment) =>
+      comment.id === commentId
+        ? { ...comment, replies: [...(comment.replies || []), newReply] }
+        : comment
+    );
+
+    console.log("Updated Comments:", updatedComments);
+
+    setComments(updatedComments);
+  };
+
   {
     return (
       <div>
@@ -171,6 +184,9 @@ export default function ProjectDetail({
                 setContent={setContent}
                 editingCommentId={editingCommentId}
                 setEditingCommentId={setEditingCommentId}
+                onReplySubmit={handleReplySubmit}
+                replyingTo={replyingTo}
+                setReplyingTo={setReplyingTo}
               />
             </CommentFormContainer>
           )}
