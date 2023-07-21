@@ -85,9 +85,12 @@ export default function ProjectDetail({
 }) {
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [comments, setComments] = useState([]);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
 
   const handleShowCommentForm = () => {
-    setShowCommentForm(!showCommentForm);
+    setShowCommentForm((prevState) => !prevState);
   };
 
   const handleCloseCommentForm = () => {
@@ -95,7 +98,39 @@ export default function ProjectDetail({
   };
 
   const handleAddComment = (newComment) => {
-    setComments([...comments, newComment]);
+    const updatedCommentList = [...comments, newComment];
+    setComments(updatedCommentList);
+  };
+
+  const handleUpdateComment = () => {
+    if (author.trim() === "" || content.trim() === "") {
+      return;
+    }
+    const updatedComment = {
+      id: editingCommentId,
+      author: author,
+      content: content,
+      timestamp: new Date().toISOString(),
+    };
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === editingCommentId ? updatedComment : comment
+      )
+    );
+    setAuthor("");
+    setContent("");
+    setEditingCommentId(null);
+  };
+
+  const handleDeleteComment = (commentId) => {
+    setComments((prevComments) =>
+      prevComments.filter((comment) => comment.id !== commentId)
+    );
+    if (editingCommentId === commentId) {
+      setAuthor("");
+      setContent("");
+      setEditingCommentId(null);
+    }
   };
 
   {
@@ -128,6 +163,14 @@ export default function ProjectDetail({
                 comments={comments}
                 onAddComment={handleAddComment}
                 onCloseCommentForm={handleCloseCommentForm}
+                onUpdateComment={handleUpdateComment}
+                onDeleteComment={handleDeleteComment}
+                author={author}
+                setAuthor={setAuthor}
+                content={content}
+                setContent={setContent}
+                editingCommentId={editingCommentId}
+                setEditingCommentId={setEditingCommentId}
               />
             </CommentFormContainer>
           )}
