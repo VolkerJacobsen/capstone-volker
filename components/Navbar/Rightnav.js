@@ -9,6 +9,7 @@ const Ul = styled.ul`
 
   li {
     padding: 18px 10px;
+    font-size: 1.3rem;
   }
 
   @media (max-width: 768px) {
@@ -22,7 +23,7 @@ const Ul = styled.ul`
     width: 300px;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
-    z-index: 2;
+    z-index: 3;
 
     li {
       position: relative;
@@ -33,6 +34,15 @@ const Ul = styled.ul`
 
 const StyledLink = styled.a`
   text-decoration: none;
+  color: black;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    color: white;
+  }
 `;
 
 const RightNav = (props) => {

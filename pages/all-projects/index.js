@@ -18,7 +18,7 @@ const StyledButton = styled.button`
   padding: 10px 20px;
   cursor: pointer;
   background-color: #f18d9e;
-  margin: 0 auto 30px;
+  margin: 0 auto 0;
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   display: flex;
   justify-content: center;
