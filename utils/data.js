@@ -179,7 +179,7 @@ export const projects = [
   {
     id: "13",
     slug: "environmental-protection",
-    title: "Environmental protection",
+    title: "Wild plant protection",
     shortDescription:
       "Grüne Liga Berlin e.V. stands for all facets of environmental protection. Join us as a volunteer",
     longDescription:

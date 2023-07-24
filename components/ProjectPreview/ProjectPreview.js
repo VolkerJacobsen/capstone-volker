@@ -8,7 +8,6 @@ const ProjectContainer = styled.div`
   background-color: #faf8f7;
   margin-left: 20px;
   padding: 0 10px 10px 10px;
-  margin-bottom: 40px;
   border-radius: 5%;
   position: relative;
   border: 5px solid #a7c7e7;
@@ -28,6 +27,11 @@ const StyledImage = styled(Image)`
   border-radius: 5%;
 `;
 
+const StyledLinkContainer = styled.div`
+  position: relative;
+  margin-top: 40px;
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
@@ -45,7 +49,8 @@ const FavoriteButton = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 70px;
+  right: 10px;
+  top: 10px;
   z-index: 1;
 
   svg {
@@ -79,31 +84,33 @@ export default function ProjectPreview({
 
   return (
     <>
-      <FavoriteButton
-        onClick={handleFavoriteToggle}
-        isFavorite={favorite}
-        aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18">
-          <path
-            d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z"
-            fill={favorite ? "#F18D9E" : "#A7C7E7"}
-          />
-        </svg>
-      </FavoriteButton>
-      <StyledLink href={`/projects/${slug}`} passHref>
-        <ProjectContainer>
-          <p className="category">{category}</p>
-          <h2>{title}</h2>
-          <StyledImage
-            src={require(`/assets/images/${imageSource}`).default}
-            alt={`Photo ${title} by ${organizer}`}
-            width={670}
-            height={400}
-          />
-          <p>{shortDescription}</p>
-        </ProjectContainer>
-      </StyledLink>
+      <StyledLinkContainer>
+        <FavoriteButton
+          onClick={handleFavoriteToggle}
+          isFavorite={favorite}
+          aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18">
+            <path
+              d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z"
+              fill={favorite ? "#F18D9E" : "#A7C7E7"}
+            />
+          </svg>
+        </FavoriteButton>
+        <StyledLink href={`/projects/${slug}`} passHref>
+          <ProjectContainer>
+            <p className="category">{category}</p>
+            <h2>{title}</h2>
+            <StyledImage
+              src={require(`/assets/images/${imageSource}`).default}
+              alt={`Photo ${title} by ${organizer}`}
+              width={670}
+              height={400}
+            />
+            <p>{shortDescription}</p>
+          </ProjectContainer>
+        </StyledLink>
+      </StyledLinkContainer>
     </>
   );
 }
