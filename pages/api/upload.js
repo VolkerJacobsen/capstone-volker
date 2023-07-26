@@ -7,7 +7,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const config = { api: { bodyParser: false } };
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default async function handler(request, response) {
   if (!request.method === "POST") {
@@ -24,14 +28,8 @@ export default async function handler(request, response) {
 
     const imageFile = files.imageSource[0];
 
-    if (!imageFile) {
-      response.status(400).json({ error: "No image provided" });
-      return;
-    }
-
-    const uploadResult = await cloudinary.uploader.upload(imageFile.filepath, {
-      folder: "kitten-cloud",
-    });
+    const uploadResult = await cloudinary.uploader.upload(imageFile.filepath);
+    console.log(uploadResult);
 
     response.status(201).json({
       id: uploadResult.public_id,
@@ -41,6 +39,6 @@ export default async function handler(request, response) {
     });
   } catch (error) {
     console.log(error);
-    response.status(500).json({ error: "something went wrong" });
+    response.status(500).json({ error: "Something went wrong" });
   }
 }

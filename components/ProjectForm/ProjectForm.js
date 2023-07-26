@@ -89,7 +89,9 @@ export default function ProjectForm({ onAddProject }) {
       });
 
       if (response.ok) {
-        const imageFile = event.target.imageSource.files[0];
+        const cloudinaryResponse = await response.json();
+        console.log("Cloudinary Response:", cloudinaryResponse);
+        const imageSource = cloudinaryResponse.secure_url;
 
         const slug = data.title.toLowerCase().replace(/\s+/g, "-");
 
@@ -104,7 +106,7 @@ export default function ProjectForm({ onAddProject }) {
           category: data.category,
           organizer: data.organizer,
           contact: data.contact,
-          imageSource: imageFile,
+          imageSource: imageSource,
           width: 670,
           height: 400,
         };
@@ -112,9 +114,6 @@ export default function ProjectForm({ onAddProject }) {
         console.log("New Project:", newProject);
 
         onAddProject(newProject);
-
-        const cloudinaryResponse = await response.json();
-        console.log("Cloudinary Response:", cloudinaryResponse);
       } else {
         const { error } = await response.json();
         throw new Error(error);

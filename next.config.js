@@ -4,7 +4,7 @@ const nextConfig = {
     styledComponents: true,
   },
 
-  images: {
+  /*images: {
     remotePatterns: [
       {
         protocol: "https",
@@ -13,6 +13,10 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+  },*/
+
+  images: {
+    domains: ["res.cloudinary.com"],
   },
 
   reactStrictMode: true,
