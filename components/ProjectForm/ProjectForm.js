@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
+import useLocalStorageState from "use-local-storage-state";
+import { v4 as uuidv4 } from "uuid";
 
 const Form = styled.form`
   background-color: #faf8f7;
@@ -55,40 +57,84 @@ const Select = styled.select`
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   margin-left: 30px;
 `;
-export default function ProjectForm({ onAddProject, onCloseForm }) {
-  const [imageFile, setImageFile] = useState(null);
+
+export default function ProjectForm({ onAddProject }) {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    if (imageFile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        data.imageSource = reader.result;
-        onAddProject(data);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      data.imageSource = "/placeholder-image.jpg";
-      onAddProject(data);
-    }
-    event.target.reset();
-    alert("You have successfully submitted your project!");
-    onCloseForm();
-  };
+  const [projects, setProjects] = useLocalStorageState("projects", {
+    defaultValue: [],
+  });
+  const [imageFile, setImageFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
+    setImageFile(event.target.files[0]);
   };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+
+      if (imageFile) {
+        formData.append("imageSource", imageFile);
+      }
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const imageFile = event.target.imageSource.files[0];
+
+        const slug = data.title.toLowerCase().replace(/\s+/g, "-");
+
+        const newProjectId = uuidv4();
+
+        const newProject = {
+          id: newProjectId,
+          title: data.title,
+          slug: slug,
+          shortDescription: data.shortDescription,
+          longdescription: data.longDescription,
+          category: data.category,
+          organizer: data.organizer,
+          contact: data.contact,
+          imageSource: imageFile,
+          width: 670,
+          height: 400,
+        };
+
+        console.log("New Project:", newProject);
+
+        onAddProject(newProject);
+
+        const cloudinaryResponse = await response.json();
+        console.log("Cloudinary Response:", cloudinaryResponse);
+      } else {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+    } catch (error) {
+      console.log(error);
+      setError("Failed to upload image or something went wrong");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   function openSelectOptions() {
     setIsSelectOpen(true);
   }
+
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <Fieldset>
+        <Fieldset disabled={isSubmitting}>
           <label htmlFor="title">
             <p>Title: </p>
             <Input
@@ -164,8 +210,11 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
             />
           </label>
         </Fieldset>
-        <SubmitButton type="submit">Submit your project</SubmitButton>
+        <SubmitButton type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Uploading project…" : "+ ADD PROJECT"}
+        </SubmitButton>
       </Form>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }

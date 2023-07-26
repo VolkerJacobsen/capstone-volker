@@ -157,7 +157,7 @@ export default function ProjectDetail({
           <p>{organizer}</p>
           <StyledImage
             alt={`Photo ${title} by ${organizer}`}
-            src={require(`/assets/images/${imageSource}`).default}
+            src={imageSource}
             width={670}
             height={400}
           />
