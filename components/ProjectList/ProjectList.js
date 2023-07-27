@@ -14,6 +14,7 @@ export default function ProjectList({ projects }) {
                 organizer={project.organizer}
                 shortDescription={project.shortDescription}
                 slug={project.slug}
+                project={project}
               ></ProjectPreview>
             </>
           </div>

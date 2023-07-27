@@ -34,21 +34,21 @@ export default function HomePage() {
   const [projectList, setProjectList] = useState(initialProjects);
   const [showForm, setShowForm] = useState(false);
 
-  const handleShowForm = () => {
+  function handleShowForm() {
     setShowForm(!showForm);
-  };
+  }
 
   function handleAddProject(newProject) {
     const updatedProjectList = [
-      { id: String(projectList.length + 1), ...newProject },
+      { ...newProject, id: String(projectList.length + 1) },
       ...projectList,
     ];
     setProjectList(updatedProjectList);
   }
 
-  const handleCloseForm = () => {
+  function handleCloseForm() {
     setShowForm(false);
-  };
+  }
 
   return (
     <>

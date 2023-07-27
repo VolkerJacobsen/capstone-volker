@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import styled from "styled-components";
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 

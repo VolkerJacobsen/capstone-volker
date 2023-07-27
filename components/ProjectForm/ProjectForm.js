@@ -58,7 +58,7 @@ const Select = styled.select`
   margin-left: 30px;
 `;
 
-export default function ProjectForm({ onAddProject }) {
+export default function ProjectForm({ onAddProject, onCloseForm }) {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [projects, setProjects] = useLocalStorageState("projects", {
     defaultValue: [],
@@ -102,7 +102,7 @@ export default function ProjectForm({ onAddProject }) {
           title: data.title,
           slug: slug,
           shortDescription: data.shortDescription,
-          longdescription: data.longDescription,
+          longDescription: data.longDescription,
           category: data.category,
           organizer: data.organizer,
           contact: data.contact,
@@ -111,7 +111,7 @@ export default function ProjectForm({ onAddProject }) {
           height: 400,
         };
 
-        console.log("New Project:", newProject);
+        setProjects([...projects, newProject]);
 
         onAddProject(newProject);
       } else {

@@ -1,6 +1,6 @@
 import GlobalStyle from "../styles";
 import Layout from "@/components/Layout/Layout";
-import { projects } from "../utils/data";
+import { projects as initialProjects } from "../utils/data";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar/Navbar.js";
 import { FavoriteProvider } from "../components/Favorite/FavoriteContext";
@@ -16,7 +16,11 @@ export default function App({ Component, pageProps }) {
       <FavoriteProvider>
         <Layout>
           <Navbar />
-          <Component {...pageProps} projects={projects} router={router} />
+          <Component
+            {...pageProps}
+            projects={initialProjects}
+            router={router}
+          />
         </Layout>
       </FavoriteProvider>
     </>
