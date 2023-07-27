@@ -32,6 +32,26 @@ const Ul = styled.ul`
   }
 `;
 
+const StyledSelect = styled.select`
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  border: none;
+  font-size: 20px;
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    background-color: #a7c7e7;
+    color: white;
+  }
+`;
+
 const StyledLink = styled.a`
   text-decoration: none;
   color: black;
@@ -73,17 +93,17 @@ const RightNav = (props) => {
         </Link>
       </li>
       <li>
-        <label htmlFor="category-select">Select Category:</label>
-        <select
+        <StyledSelect
+          aria-label="Select Category"
           id="category-select"
           onChange={handleCategoryChange}
           value={router.query.category || ""}
         >
-          <option value="">All</option>
+          <option value="">Select a Category</option>
           <option value="community">Community projects</option>
           <option value="environment">Environmental projects</option>
           <option value="politics">Political projects</option>
-        </select>
+        </StyledSelect>
       </li>
     </Ul>
   );
