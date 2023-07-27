@@ -23,13 +23,9 @@ export default async function handler(request, response) {
     const form = formidable({});
     const [fields, files] = await form.parse(request);
 
-    console.log("Fields:", fields);
-    console.log("Files:", files);
-
     const imageFile = files.imageSource[0];
 
     const uploadResult = await cloudinary.uploader.upload(imageFile.filepath);
-    console.log(uploadResult);
 
     response.status(201).json({
       id: uploadResult.public_id,
