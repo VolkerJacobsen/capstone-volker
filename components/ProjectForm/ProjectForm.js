@@ -91,7 +91,7 @@ export default function ProjectForm({ onAddProject }) {
       if (response.ok) {
         const cloudinaryResponse = await response.json();
         console.log("Cloudinary Response:", cloudinaryResponse);
-        const imageSource = cloudinaryResponse.secure_url;
+        const imageSource = cloudinaryResponse.src;
 
         const slug = data.title.toLowerCase().replace(/\s+/g, "-");
 
