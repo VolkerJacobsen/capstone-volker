@@ -15,7 +15,7 @@ export default createGlobalStyle`
     font-family: ${juliusSans.style.fontFamily};
   }
 
-  button, select {
+  button, textarea, select, input, input::file-selector-button {
     font-family: ${juliusSans.style.fontFamily};
   }
 `;

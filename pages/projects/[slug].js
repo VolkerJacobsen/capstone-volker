@@ -1,12 +1,9 @@
 import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
 import { useRouter } from "next/router";
-import useLocalStorageState from "use-local-storage-state";
 
-export default function ProjectDetailsPage() {
-  const [projects] = useLocalStorageState("projects", { defaultValue: [] });
+export default function ProjectDetailsPage({ projects }) {
   const router = useRouter();
   const { slug } = router.query;
-
   if (!slug) {
     return <div>Project not found</div>;
   }
@@ -14,11 +11,7 @@ export default function ProjectDetailsPage() {
 
   return (
     <div>
-      {currentProject ? (
-        <ProjectDetail project={currentProject} />
-      ) : (
-        <div>Project not found</div>
-      )}
+      <ProjectDetail project={currentProject} />
     </div>
   );
 }

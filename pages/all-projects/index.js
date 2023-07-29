@@ -7,15 +7,14 @@ import ProjectForm from "../../components/ProjectForm/ProjectForm";
 const HeaderText = styled.h1`
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 `;
 
 const StyledButton = styled.button`
   color: #fff;
-  font-size: 1.1em;
   border-radius: 100px;
   border: 0;
-  padding: 10px 20px;
+  padding: 5px 10px;
   cursor: pointer;
   background-color: #f18d9e;
   margin: 0 auto 0;
@@ -34,32 +33,35 @@ export default function HomePage() {
   const [projectList, setProjectList] = useState(initialProjects);
   const [showForm, setShowForm] = useState(false);
 
-  function handleShowForm() {
+  const handleShowForm = () => {
     setShowForm(!showForm);
-  }
+  };
 
   function handleAddProject(newProject) {
     const updatedProjectList = [
-      { ...newProject, id: String(projectList.length + 1) },
+      { id: String(projectList.length + 1), ...newProject },
       ...projectList,
     ];
     setProjectList(updatedProjectList);
   }
 
-  function handleCloseForm() {
+  const handleCloseForm = () => {
     setShowForm(false);
-  }
+  };
 
   return (
     <>
       <HeaderText>List of projects</HeaderText>
-      <StyledButton onClick={handleShowForm}>+ ADD PROJECT</StyledButton>
+      <StyledButton onClick={handleShowForm}>
+        {showForm ? "CLOSE FORM" : "+ ADD PROJECT"}
+      </StyledButton>
       {showForm && (
         <ProjectForm
           onAddProject={handleAddProject}
           onCloseForm={handleCloseForm}
         />
       )}
+
       <ProjectList projects={projectList} />
     </>
   );

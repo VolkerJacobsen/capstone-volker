@@ -1,10 +1,10 @@
 import GlobalStyle from "../styles";
-import Layout from "@/components/Layout/Layout";
 import { projects as initialProjects } from "../utils/data";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar/Navbar.js";
 import { FavoriteProvider } from "../components/Favorite/FavoriteContext";
 import { Julius_Sans_One } from "@next/font/google";
+import Layout from "../components/Layout/Layout";
 
 const mainFont = Julius_Sans_One({ weight: "400", subsets: ["latin"] });
 
