@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
+import { useState, useEffect } from "react";
 
 const Ul = styled.ul`
   list-style: none;
@@ -32,6 +34,26 @@ const Ul = styled.ul`
   }
 `;
 
+/*const StyledSelect = styled.select`
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  border: none;
+  font-size: 20px;
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    background-color: #a7c7e7;
+    color: white;
+  }
+`;*/
+
 const StyledLink = styled.a`
   text-decoration: none;
   color: black;
@@ -45,15 +67,18 @@ const StyledLink = styled.a`
   }
 `;
 
-const RightNav = (props) => {
+export default function RightNav(props) {
   const { open, setOpen } = props;
   const router = useRouter();
 
-  const handleCategoryChange = (event) => {
-    const selectedCategory = event.target.value;
-    router.push(`/category/${selectedCategory}`);
+  const handleCategoryChange = (selectedCategory) => {
+    if (selectedCategory !== "") {
+      router.push(`/category/${selectedCategory}`);
+    }
     setOpen(false);
   };
+
+  const selectedCategory = router.query.category || "";
 
   return (
     <Ul open={open}>
@@ -73,20 +98,12 @@ const RightNav = (props) => {
         </Link>
       </li>
       <li>
-        <label htmlFor="category-select">Select Category:</label>
-        <select
-          id="category-select"
+        <CustomDropdown
+          aria-label="Select Category"
           onChange={handleCategoryChange}
-          value={router.query.category || ""}
-        >
-          <option value="">All</option>
-          <option value="community">Community projects</option>
-          <option value="environment">Environmental projects</option>
-          <option value="politics">Political projects</option>
-        </select>
+          selectedCategory={selectedCategory}
+        ></CustomDropdown>
       </li>
     </Ul>
   );
-};
-
-export default RightNav;
+}

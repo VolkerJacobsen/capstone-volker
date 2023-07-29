@@ -4,17 +4,23 @@ import StyledBack from "../StyledBackButton/StyledBackButton.js";
 import CommentSection from "../CommentSection/CommentSection.js";
 import { useState } from "react";
 
-const HeaderText = styled.h1`
+const StyledHeaderText = styled.h2`
   display: flex;
   justify-content: center;
   margin-top: -50px;
+  padding-bottom: 20px;
+  margin-left: 20px;
 `;
 
-const ProjectContainer = styled.div`
+const StyledBox = styled.div`
+  max-width: 768px;
+  margin: 0 auto 0;
+`;
+
+const StyledProjectContainer = styled.div`
   background-color: #faf8f7;
-  margin-left: 20px;
+  margin: 20px;
   padding: 0 10px 10px 10px;
-  margin-bottom: 20px;
   border-radius: 5%;
   border: 5px solid #a7c7e7;
   border-style: none none solid solid;
@@ -36,7 +42,7 @@ const StyledImage = styled(Image)`
 const StyledButton = styled.button`
   display: inline-block;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 10px;
 
   padding-left: 20px;
@@ -61,7 +67,7 @@ const StyledButtonContainer = styled.div`
   justify-content: space-around;
 `;
 
-const CommentFormContainer = styled.div`
+const StyledCommentFormContainer = styled.div`
   width: 100%;
 `;
 
@@ -150,47 +156,49 @@ export default function ProjectDetail({
     return (
       <div>
         <StyledBack />
-        <HeaderText>Detailpage</HeaderText>
-        <ProjectContainer>
-          <p className="category">{category}</p>
-          <h2>{title}</h2>
-          <p>{organizer}</p>
-          <StyledImage
-            alt={`Photo ${title} by ${organizer}`}
-            src={require(`/assets/images/${imageSource}`).default}
-            width={670}
-            height={400}
-          />
-          <p>{longDescription}</p>
-          <StyledButtonContainer>
-            <StyledButton>
-              <StyledLink href={`mailto:${contact}`}>Contact us</StyledLink>
-            </StyledButton>
-            <StyledButton onClick={handleShowCommentForm}>
-              Leave a note
-            </StyledButton>
-          </StyledButtonContainer>
-          {showCommentForm && (
-            <CommentFormContainer>
-              <CommentSection
-                comments={comments}
-                onAddComment={handleAddComment}
-                onCloseCommentForm={handleCloseCommentForm}
-                onUpdateComment={handleUpdateComment}
-                onDeleteComment={handleDeleteComment}
-                author={author}
-                setAuthor={setAuthor}
-                content={content}
-                setContent={setContent}
-                editingCommentId={editingCommentId}
-                setEditingCommentId={setEditingCommentId}
-                onReplySubmit={handleReplySubmit}
-                replyingTo={replyingTo}
-                setReplyingTo={setReplyingTo}
-              />
-            </CommentFormContainer>
-          )}
-        </ProjectContainer>
+        <StyledHeaderText>Detailpage</StyledHeaderText>
+        <StyledBox>
+          <StyledProjectContainer>
+            <p className="category">{category}</p>
+            <h2>{title}</h2>
+            <p>{organizer}</p>
+            <StyledImage
+              alt={`Photo ${title} by ${organizer}`}
+              src={imageSource}
+              width={670}
+              height={400}
+            />
+            <p>{longDescription}</p>
+            <StyledButtonContainer>
+              <StyledButton>
+                <StyledLink href={`mailto:${contact}`}>Contact us</StyledLink>
+              </StyledButton>
+              <StyledButton onClick={handleShowCommentForm}>
+                Leave a note
+              </StyledButton>
+            </StyledButtonContainer>
+            {showCommentForm && (
+              <StyledCommentFormContainer>
+                <CommentSection
+                  comments={comments}
+                  onAddComment={handleAddComment}
+                  onCloseCommentForm={handleCloseCommentForm}
+                  onUpdateComment={handleUpdateComment}
+                  onDeleteComment={handleDeleteComment}
+                  author={author}
+                  setAuthor={setAuthor}
+                  content={content}
+                  setContent={setContent}
+                  editingCommentId={editingCommentId}
+                  setEditingCommentId={setEditingCommentId}
+                  onReplySubmit={handleReplySubmit}
+                  replyingTo={replyingTo}
+                  setReplyingTo={setReplyingTo}
+                />
+              </StyledCommentFormContainer>
+            )}
+          </StyledProjectContainer>
+        </StyledBox>
       </div>
     );
   }

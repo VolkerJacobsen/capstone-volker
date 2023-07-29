@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import { Julius_Sans_One } from "@next/font/google";
+
+const juliusSans = Julius_Sans_One({ weight: "400", subsets: ["latin"] });
 
 export default createGlobalStyle`
   *,
@@ -9,6 +12,10 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: system-ui;
+    font-family: ${juliusSans.style.fontFamily};
+  }
+
+  button, textarea, select, input, input::file-selector-button {
+    font-family: ${juliusSans.style.fontFamily};
   }
 `;

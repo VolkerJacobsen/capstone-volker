@@ -1,9 +1,40 @@
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import styled from "styled-components";
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
+import StyledBack from "../../components/StyledBackButton/StyledBackButton";
 
-const HeaderText = styled.h1`
+const HeaderText = styled.h2`
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+  margin-left: 20px;
+  margin-bottom: -20px;
+
+  @media screen and (min-width: 769px) {
+    font-size: 2rem;
+  }
+`;
+
+const StyledBox = styled.div`
+  margin-left: 20px;
+  margin-right: 20px;
+`;
+
+const ProjectListContainer = styled.span`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1025px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const StyledNote = styled.p`
   display: flex;
   justify-content: center;
 `;
@@ -30,30 +61,35 @@ export default function Favorites({ projects }) {
 
   return (
     <>
+      <StyledBack />
       <HeaderText>My favorite projects</HeaderText>
-      {favorites.length > 0 ? (
-        favorites.map((slug) => {
-          const project = projects.find((project) => project.slug === slug);
-          if (project) {
-            return (
-              <ProjectPreview
-                key={project.slug}
-                slug={project.slug}
-                category={project.category}
-                title={project.title}
-                imageSource={project.imageSource}
-                organizer={project.organizer}
-                shortDescription={project.shortDescription}
-                isFavorite={true}
-                onFavoriteToggle={handleFavoriteToggle}
-              />
-            );
-          }
-          return null;
-        })
-      ) : (
-        <p>No favorite projects yet.</p>
-      )}
+      <StyledBox>
+        <ProjectListContainer>
+          {favorites.length > 0 ? (
+            favorites.map((slug) => {
+              const project = projects.find((project) => project.slug === slug);
+              if (project) {
+                return (
+                  <ProjectPreview
+                    key={project.slug}
+                    slug={project.slug}
+                    category={project.category}
+                    title={project.title}
+                    imageSource={project.imageSource}
+                    organizer={project.organizer}
+                    shortDescription={project.shortDescription}
+                    isFavorite={true}
+                    onFavoriteToggle={handleFavoriteToggle}
+                  />
+                );
+              }
+              return null;
+            })
+          ) : (
+            <StyledNote>No favorite projects yet.</StyledNote>
+          )}
+        </ProjectListContainer>
+      </StyledBox>
     </>
   );
 }

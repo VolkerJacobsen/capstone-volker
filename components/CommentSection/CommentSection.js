@@ -58,7 +58,7 @@ const CommentList = styled.ul`
 const StyledButton = styled.button`
   display: inline-block;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 10px;
   margin-top: 20px;
   padding-left: 20px;

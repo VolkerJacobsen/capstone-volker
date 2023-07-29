@@ -10,7 +10,8 @@ export const projects = [
     category: "Environment",
     organizer: "wirBerlin gGmbH",
     contact: "info@wir-berlin.org",
-    imageSource: "park-cleaning.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203420/park-cleaning_stifmj.jpg",
     width: 670,
     height: 400,
   },
@@ -25,7 +26,8 @@ export const projects = [
     category: "Environment",
     organizer: "aufBuchen e.V.",
     contact: "info@aufbuchen.de",
-    imageSource: "tree-planting.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203421/tree-planting_exakqf.jpg",
     width: 670,
     height: 400,
   },
@@ -40,7 +42,8 @@ export const projects = [
     category: "Politics",
     organizer: "Paritätische Akademie Berlin GmbH",
     contact: "paritaetische@akademie.org",
-    imageSource: "anti-bias.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203331/anti-bias_cwlj5o.jpg",
     width: 670,
     height: 400,
   },
@@ -54,7 +57,8 @@ export const projects = [
     category: "Community",
     organizer: "Seniorenheim Albestraße GmbH",
     contact: "schilde@ev-seniorenheim.de",
-    imageSource: "piano-playing.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203420/piano-playing_tjqzp1.jpg",
     width: 670,
     height: 400,
   },
@@ -68,7 +72,8 @@ export const projects = [
     category: "Communtiy",
     organizer: "Stiftung Gute Tat Berlin",
     contact: "berlin@gute-tat.de",
-    imageSource: "reading-public.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203420/reading-public_yrhzdq.jpg",
     width: 670,
     height: 400,
   },
@@ -83,7 +88,8 @@ export const projects = [
     category: "Community",
     organizer: "Wir packen´s an e.V.",
     contact: "axel.grafmanns@wir-packens-an.info",
-    imageSource: "packing-relief-supply.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203419/packing-relief-supply_gyf8qy.jpg",
     width: 670,
     height: 400,
   },
@@ -97,7 +103,8 @@ export const projects = [
     category: "Community",
     organizer: "Stiftung Gute Tat Berlin",
     contact: "berlin@gute-tat.de",
-    imageSource: "online-counseling.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203419/online-counseling_ijb5sp.jpg",
     width: 670,
     height: 400,
   },
@@ -112,7 +119,8 @@ export const projects = [
     category: "Community",
     organizer: "RepairCafe GmbH",
     contact: "info@repaircafe.de",
-    imageSource: "repair-cafe.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203420/repair-cafe_sz9pec.jpg",
     width: 670,
     height: 400,
   },
@@ -127,13 +135,14 @@ export const projects = [
     category: "Community",
     organizer: "Tamaja Soziale Dienstleistungen e.V.",
     contact: "info@tamaja.de",
-    imageSource: "tutoring-children.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203421/tutoring-children_kqnmlg.jpg",
     width: 670,
     height: 400,
   },
   {
     id: "10",
-    slug: "mentoring-children",
+    slug: "mentoring-refugees",
     title: "Mentoring refugees",
     shortDescription:
       "Tamaja Soziale Dienstleistungen is looking for volunteer mentors for refugees.",
@@ -142,7 +151,8 @@ export const projects = [
     category: "Community",
     organizer: "Tamaja Soziale Dienstleistungen e.V.",
     contact: "info@tamaja.de",
-    imageSource: "mentoring-refugees.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203419/mentoring-refugees_vnxbow.jpg",
     width: 670,
     height: 400,
   },
@@ -157,7 +167,8 @@ export const projects = [
     category: "Environment",
     organizer: "Urbanity and Diversity e.V.",
     contact: "info@urbanity-diversity.de",
-    imageSource: "urbanity-diversity.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203421/urbanity-diversity_vsmnjm.png",
     width: 670,
     height: 400,
   },
@@ -172,7 +183,8 @@ export const projects = [
     category: "Environment",
     organizer: "Weltacker Pankow e.v.",
     contact: "info@weltacker.de",
-    imageSource: "weltacker.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203421/weltacker_eozxls.jpg",
     width: 670,
     height: 400,
   },
@@ -187,7 +199,8 @@ export const projects = [
     category: "Environment",
     organizer: "Grüne Liga e.V",
     contact: "info@gruene-liga.de",
-    imageSource: "gruene-liga.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203403/gruene-liga_pebsjs.jpg",
     width: 670,
     height: 400,
   },
@@ -202,7 +215,8 @@ export const projects = [
     category: "Politics",
     organizer: "Viel Respekt Stiftung e.V.",
     contact: "info@viel-respekt.de",
-    imageSource: "diversity-votes.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203403/diversity-votes_lgswbp.jpg",
     width: 670,
     height: 400,
   },
@@ -217,7 +231,8 @@ export const projects = [
     category: "Politics",
     organizer: "Voice of Youth e.V.",
     contact: "info@voice-of-youth.de",
-    imageSource: "democratic-youth.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203402/democratic-youth_fhqzsx.jpg",
     width: 670,
     height: 400,
   },
@@ -232,7 +247,8 @@ export const projects = [
     category: "Politics",
     organizer: "Street Collage e.V.",
     contact: "info@street-collage.com",
-    imageSource: "street-collage.jpg",
+    imageSource:
+      "https://res.cloudinary.com/dlhyj7u3l/image/upload/v1690203420/street-collage_bkrnij.jpg",
     width: 670,
     height: 400,
   },

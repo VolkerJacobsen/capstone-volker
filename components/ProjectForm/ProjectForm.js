@@ -1,25 +1,30 @@
-import { useState } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
+import useLocalStorageState from "use-local-storage-state";
+import { v4 as uuidv4 } from "uuid";
 
-const Form = styled.form`
+const StyledFormContainer = styled.div`
+  max-width: 768px;
+  margin: 0 auto;
+`;
+
+const StyledForm = styled.form`
   background-color: #faf8f7;
-  margin-left: 20px;
+  margin: 20px;
   padding: 0 10px 10px 10px;
-  margin-bottom: 20px;
   border-radius: 5%;
 `;
-const Fieldset = styled.fieldset`
+const StyledFieldset = styled.fieldset`
   border: none;
 `;
-const SubmitButton = styled.button`
+const StyledSubmitButton = styled.button`
   color: #fff;
-  font-size: 1.1em;
   border-radius: 100px;
   border: 0;
-  padding: 10px 30px;
+  padding: 5px 10px;
+  margin: 10px auto 10px;
   cursor: pointer;
   background-color: #f18d9e;
-  margin: 20px auto 20px;
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   display: flex;
   justify-content: center;
@@ -30,15 +35,23 @@ const SubmitButton = styled.button`
     color: black;
   }
 `;
-const Input = styled.input`
+const StyledInput = styled.input`
   padding: 10px;
   font-size: 16px;
   border-radius: 10px;
   border: 1px solid rgb(204 203 203);
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   width: 100%;
+
+  &::file-selector-input {
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid rgb(204 203 203);
+    box-shadow: 1px 1px 1px 1px rgb(204 203 203);
+    width: 100%;
+  }
 `;
-const Textarea = styled.textarea`
+const StyledTextarea = styled.textarea`
   padding: 10px;
   font-size: 16px;
   border-radius: 10px;
@@ -47,7 +60,12 @@ const Textarea = styled.textarea`
   width: 100%;
   font-family: system-ui;
 `;
-const Select = styled.select`
+
+const StyledSelectContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const StyledSelect = styled.select`
   padding: 10px;
   font-size: 16px;
   border-radius: 10px;
@@ -55,43 +73,98 @@ const Select = styled.select`
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   margin-left: 30px;
 `;
+
 export default function ProjectForm({ onAddProject, onCloseForm }) {
-  const [imageFile, setImageFile] = useState(null);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    if (imageFile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        data.imageSource = reader.result;
-        onAddProject(data);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      data.imageSource = "/placeholder-image.jpg";
-      onAddProject(data);
-    }
-    event.target.reset();
-    alert("You have successfully submitted your project!");
-    onCloseForm();
-  };
+  const [projects, setProjects] = useLocalStorageState("projects", {
+    defaultValue: [],
+  });
+  const [imageFile, setImageFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
+    setImageFile(event.target.files[0]);
   };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+
+      if (imageFile) {
+        formData.append("imageSource", imageFile);
+      }
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const cloudinaryResponse = await response.json();
+        console.log("Cloudinary Response:", cloudinaryResponse);
+        const imageSource = cloudinaryResponse.src;
+
+        const slug = data.title.toLowerCase().replace(/\s+/g, "-");
+
+        const newProjectId = uuidv4();
+
+        const newProject = {
+          id: newProjectId,
+          title: data.title,
+          slug: slug,
+          shortDescription: data.shortDescription,
+          longdescription: data.longDescription,
+          category: data.category,
+          organizer: data.organizer,
+          contact: data.contact,
+          imageSource: imageSource,
+          width: 670,
+          height: 400,
+        };
+
+        onAddProject(newProject);
+        onCloseForm();
+      } else {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+    } catch (error) {
+      console.log(error);
+      setError("Failed to upload image or something went wrong");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   function openSelectOptions() {
     setIsSelectOpen(true);
   }
+
+  const textbox = useRef(null);
+
+  function adjustHeight() {
+    textbox.current.style.height = "inherit";
+    textbox.current.style.height = `${textbox.current.scrollHeight}px`;
+  }
+
+  useLayoutEffect(adjustHeight, []);
+
+  function handleKeyDown(e) {
+    adjustHeight();
+  }
+
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <Fieldset>
+    <StyledFormContainer>
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledFieldset disabled={isSubmitting}>
           <label htmlFor="title">
             <p>Title: </p>
-            <Input
+            <StyledInput
               name="title"
               type="text"
               minLength="5"
@@ -113,7 +186,9 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           </label>
           <label htmlFor="shortDescription">
             <p>Short description: </p>
-            <Textarea
+            <StyledTextarea
+              ref={textbox}
+              onChange={handleKeyDown}
               name="shortDescription"
               id="shortDescription"
               minLength="30"
@@ -124,7 +199,9 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           </label>
           <label htmlFor="longDescription">
             <p>Long description: </p>
-            <Textarea
+            <StyledTextarea
+              ref={textbox}
+              onChange={handleKeyDown}
               name="longDescription"
               id="longDescription"
               minLength="50"
@@ -135,17 +212,23 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           </label>
           <br />
           <br />
-          <label htmlFor="category_form" onClick={openSelectOptions}>
-            Select a category:{" "}
-          </label>
-          <Select name="category" id="category_form" required={isSelectOpen}>
-            <option value="Community">Community</option>
-            <option value="Environment">Environment</option>
-            <option value="Politics">Politics</option>
-          </Select>
+          <StyledSelectContainer>
+            <label htmlFor="category_form" onClick={openSelectOptions}>
+              Select a category:{" "}
+            </label>
+            <StyledSelect
+              name="category"
+              id="category_form"
+              required={isSelectOpen}
+            >
+              <option value="Community">Community</option>
+              <option value="Environment">Environment</option>
+              <option value="Politics">Politics</option>
+            </StyledSelect>
+          </StyledSelectContainer>
           <label htmlFor="organizer">
             <p>Organizer:</p>
-            <Input
+            <StyledInput
               type="text"
               name="organizer"
               id="organizer"
@@ -155,7 +238,7 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           </label>
           <label htmlFor="contact">
             <p>Contact email: </p>
-            <Input
+            <StyledInput
               name="contact"
               id="contact"
               type="email"
@@ -163,9 +246,12 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
               placeholder="Enter your email-address"
             />
           </label>
-        </Fieldset>
-        <SubmitButton type="submit">Submit your project</SubmitButton>
-      </Form>
-    </div>
+        </StyledFieldset>
+        <StyledSubmitButton type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Uploading project…" : "+ ADD PROJECT"}
+        </StyledSubmitButton>
+      </StyledForm>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </StyledFormContainer>
   );
 }

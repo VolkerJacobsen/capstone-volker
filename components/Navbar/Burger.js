@@ -40,7 +40,7 @@ const StyledBurger = styled.div`
   }
 `;
 
-const Burger = () => {
+export default function Burger() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -53,6 +53,4 @@ const Burger = () => {
       <RightNav open={open} setOpen={setOpen} />
     </>
   );
-};
-
-export default Burger;
+}

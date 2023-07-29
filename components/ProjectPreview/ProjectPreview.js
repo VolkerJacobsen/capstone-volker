@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 
 const ProjectContainer = styled.div`
   background-color: #faf8f7;
-  margin-left: 20px;
   padding: 0 10px 10px 10px;
+  margin-top: 20px;
   border-radius: 5%;
   position: relative;
   border: 5px solid #a7c7e7;
@@ -16,8 +16,8 @@ const ProjectContainer = styled.div`
   .category {
     font-size: 20px;
     position: relative;
-    bottom: 12px;
-    left: 25px;
+    bottom: 10px;
+    left: 20px;
   }
 `;
 
@@ -29,7 +29,7 @@ const StyledImage = styled(Image)`
 
 const StyledLinkContainer = styled.div`
   position: relative;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 const StyledLink = styled(Link)`
@@ -39,8 +39,8 @@ const StyledLink = styled(Link)`
 
 const FavoriteButton = styled.button`
   background-color: transparent;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 3px solid #f18d9e;
   padding: 0;
@@ -49,13 +49,13 @@ const FavoriteButton = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 5px;
+  top: 5px;
   z-index: 1;
 
   svg {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
     fill: ${({ isFavorite }) => (isFavorite ? "#F18D9E" : "#A7C7E7")};
     transition: fill 0.3s ease-in-out;
   }
@@ -82,12 +82,14 @@ export default function ProjectPreview({
     toggleFavorite(slug, newFavorite);
   };
 
+  console.log("Rendering ProjectPreview with Slug:", slug);
+
   return (
     <>
       <StyledLinkContainer>
         <FavoriteButton
           onClick={handleFavoriteToggle}
-          isFavorite={favorite}
+          $isFavorite={favorite}
           aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18">
@@ -97,12 +99,12 @@ export default function ProjectPreview({
             />
           </svg>
         </FavoriteButton>
-        <StyledLink href={`/projects/${slug}`} passHref>
+        <StyledLink href={`/projects/${slug}`} $passHref>
           <ProjectContainer>
             <p className="category">{category}</p>
             <h2>{title}</h2>
             <StyledImage
-              src={require(`/assets/images/${imageSource}`).default}
+              src={imageSource}
               alt={`Photo ${title} by ${organizer}`}
               width={670}
               height={400}
