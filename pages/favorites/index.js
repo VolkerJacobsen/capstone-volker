@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 import StyledBack from "../../components/StyledBackButton/StyledBackButton";
-import { StyledHeaderText, StyledBackBox, StyledBox, StyledProjectListContainer, StyledNote } from "./favorites.styled";
+import { StyledHeaderText, StyledBackBox, StyledBox, StyledProjectListContainer, StyledNote } from "../../components/StylesPages/favorites.styled";
 
 
 export default function Favorites({ projects }) {
