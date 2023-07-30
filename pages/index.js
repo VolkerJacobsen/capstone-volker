@@ -1,4 +1,4 @@
-import { StyledContentContainer, StyledImage, StyledHeaderText, StyledDiv, StyledContactContainer, StyledEmailLink} from "./index.styled";
+import { StyledContentContainer, StyledImage, StyledHeaderText, StyledDiv, StyledContactContainer, StyledEmailLink} from "../components/StylesPages/index.styled";
 
 
 export default function AboutUs() {

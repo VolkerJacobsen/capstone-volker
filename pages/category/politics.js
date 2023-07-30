@@ -1,6 +1,6 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 import StyledBack from "../../components/StyledBackButton/StyledBackButton.js";
-import { StyledHeaderText, StyledBox, StyledProjectListContainer } from "./category.styled";
+import { StyledHeaderText, StyledBox, StyledProjectListContainer } from "../../components/StylesPages/category.styled";
 
 
 export default function PoliticsPage({ projects }) {
