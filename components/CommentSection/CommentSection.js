@@ -38,7 +38,6 @@ const Textarea = styled.textarea`
   border: 1px solid rgb(204 203 203);
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   width: 87%;
-  font-family: system-ui;
 `;
 
 const ButtonContainer = styled.div`

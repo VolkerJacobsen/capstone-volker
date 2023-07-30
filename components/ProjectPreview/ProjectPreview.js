@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 const ProjectContainer = styled.div`
   background-color: #faf8f7;
   padding: 0 10px 10px 10px;
-  margin-top: 20px;
   border-radius: 5%;
   position: relative;
   border: 5px solid #a7c7e7;
@@ -29,7 +28,7 @@ const StyledImage = styled(Image)`
 
 const StyledLinkContainer = styled.div`
   position: relative;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 const StyledLink = styled(Link)`
