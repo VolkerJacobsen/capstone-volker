@@ -58,7 +58,6 @@ const StyledTextarea = styled.textarea`
   border: 1px solid rgb(204 203 203);
   box-shadow: 1px 1px 1px 1px rgb(204 203 203);
   width: 100%;
-  font-family: system-ui;
 `;
 
 const StyledSelectContainer = styled.div`

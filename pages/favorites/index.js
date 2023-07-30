@@ -6,16 +6,22 @@ import StyledBack from "../../components/StyledBackButton/StyledBackButton";
 const HeaderText = styled.h2`
   display: flex;
   justify-content: center;
-  margin-top: -20px;
+  margin-top: -40px;
   margin-left: 20px;
-  margin-bottom: -20px;
+  margin-bottom: -100px;
 
   @media screen and (min-width: 769px) {
     font-size: 2rem;
   }
 `;
 
+const StyledBackBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  `;
+
 const StyledBox = styled.div`
+margin-top: -30px;
   margin-left: 20px;
   margin-right: 20px;
 `;
@@ -61,7 +67,9 @@ export default function Favorites({ projects }) {
 
   return (
     <>
+    <StyledBackBox>
       <StyledBack />
+      </StyledBackBox>
       <HeaderText>My favorite projects</HeaderText>
       <StyledBox>
         <ProjectListContainer>
