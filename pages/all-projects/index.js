@@ -2,7 +2,7 @@ import ProjectList from "../../components/ProjectList/ProjectList";
 import { useState } from "react";
 import { projects as initialProjects } from "../../utils/data";
 import ProjectForm from "../../components/ProjectForm/ProjectForm";
-import {StyledHeaderText, StyledButton } from "./index.styled";
+import {StyledHeaderText, StyledButton } from "../../components/StylesPages/all-projects.styled";
 
 
 export default function HomePage() {
