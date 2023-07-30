@@ -1,37 +1,40 @@
-# New Next Project
+# getInvolved - Capstone project
 
-This project was created from the neue fische `next` template.
+> getInvolved aims to connect people that want to make a difference by supporting non-profit organizations in the Berlin area.
 
-You can [🔗 **use this template on CodeSandbox**](https://codesandbox.io/p/sandbox/github/neuefische/web-exercises/tree/main/templates/next?file=/README.md) or locally by running this command in your Terminal:
+<img align="center" src="https://res.cloudinary.com/dlhyj7u3l/video/upload/v1690715695/volker_jacobsen_wvmp5j.mov" alt="walkthrue video assembler web-app" width="250" style="margin-left:16px;"/>
 
-```bash
-npx -y ghcd@latest neuefische/web-exercises/tree/main/templates/next my-app -i
-```
+## `Description`
 
-## Development
+**This is a capstone project for [neuefische](https://www.neuefische.de/) web development bootcamp.**
 
-### Local Development
+**getInvolved** is a community app where you can find detailed information about non-profit organizations in the Berlin area, where you can register for specific projects and also create your own initiative.
 
-To work locally, please install the dependencies using `npm i` first.
+## `Tech Stack`
 
-Run `npm run dev` to start a development server and open the displayed URL in a browser.
+- React
+- Next.js
+- Node.js
+- Styled Components
+- MongoDB Atlas
+- Mongoose
+- Cloudinary
+- Formidable
 
-Use `npm run test` to run the tests.
 
-### CodeSandbox Cloud
+### `Demo`
+You can find the hosted version of getInvolved: [Deployment @ Vercel](https://capstone-volker-no7h324dd-volkerjacobsen.vercel.app/)
 
-Select the "Preview: 3000" tab to view this project.
+***IMPORTANT NOTE: currently optimized for mobile!***
 
-Select the "Tests: logs" tab to view the tests.
+## `Project Setup`
 
-> The `npm run dev` and `npm run test` scripts run automatically.
+To run this project locally, you need to
+- **clone this repository** and install the dependencies using `npm i` first.   
+- **Create** your own `.env` file inside the root folder.
+- Add your `MONGODB_URI` from mongoDB.
+- Add your `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY` and `CLOUDINARY_SECRET` from cloudinary.
 
-### Scripts
-
-You can use the following commands:
-
-- `npm run dev` to start a development server
-- `npm run build` to build the project
-- `npm run start` to start a production server
-- `npm run test` to run the tests
-- `npm run lint` to run the linter
+You can then use the following commands:
+- `npm run dev` to start the development server
+- `npm run test` to run the tests in watch mode (if available)
