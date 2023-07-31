@@ -2,7 +2,7 @@
 
 > getInvolved aims to connect people that want to make a difference by supporting non-profit organizations in the Berlin area.
 
-<img align="center" src="https://github.com/VolkerJacobsen/capstone-volker/blob/main/public/volker_jacobsen_wvmp5j-_2_.gif" alt="getInvolved walkthrough" width="250" />
+<img align="center" src="https://github.com/VolkerJacobsen/capstone-volker/blob/main/public/volker_jacobsen_wvmp5j-_2_.gif" alt="getInvolved walkthrough" width="250" style="margin: 0 auto;"/>
 
 
 ## `Description`

@@ -1,42 +1,5 @@
-import Image from "next/image";
-import styled from "styled-components";
+import { StyledContentContainer, StyledImage, StyledHeaderText, StyledDiv, StyledContactContainer, StyledEmailLink} from "../components/StylesPages/index.styled";
 
-const ContentContainer = styled.div`
-  background-color: #faf8f7;
-  margin: 10px 20px 10px 20px;
-  padding: 0 10px 10px 10px;
-  border-radius: 5%;
-`;
-
-const StyledImage = styled(Image)`
-  margin-top: 10px;
-  height: 100%;
-  width: 100%;
-  border-radius: 5%;
-`;
-
-const HeaderText = styled.h1`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledDiv = styled.div`
-  max-width: 768px;
-  margin: 0 auto;
-`;
-
-const ContactContainer = styled.section`
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const EmailLink = styled.a`
-  text-decoration: underline;
-  color: #f18d9e;
-  cursor: pointer;
-`;
 
 export default function AboutUs() {
   const handleEmailClick = () => {
@@ -46,8 +9,8 @@ export default function AboutUs() {
   return (
     <>
       <StyledDiv>
-        <HeaderText>About Us</HeaderText>
-        <ContentContainer>
+        <StyledHeaderText>About Us</StyledHeaderText>
+        <StyledContentContainer>
           <StyledImage
             src="/about-us.jpg"
             alt="About us photo"
@@ -73,15 +36,15 @@ export default function AboutUs() {
               orientation. We also expect this openness from our users. If you
               want to know more about us, have same feedback or want to engage
               with us please don´t hesitate to{" "}
-              <EmailLink onClick={handleEmailClick}>contact</EmailLink> us.
+              <StyledEmailLink onClick={handleEmailClick}>contact</StyledEmailLink> us.
             </p>
           </section>
-          <ContactContainer>
+          <StyledContactContainer>
             <p>
               <strong>email: </strong> info@getinvolved.com
             </p>
-          </ContactContainer>
-        </ContentContainer>
+          </StyledContactContainer>
+        </StyledContentContainer>
       </StyledDiv>
     </>
   );
