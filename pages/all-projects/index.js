@@ -2,7 +2,7 @@ import ProjectList from "../../components/ProjectList/ProjectList";
 import { useState } from "react";
 import ProjectForm from "../../components/ProjectForm/ProjectForm";
 import {StyledHeaderText, StyledButton } from "../../components/StylesPages/all-projects.styled";
-import { connectToDatabase } from '../../db/connect';
+import connectToDatabase from '../../db/connect.js';
 import Project from '../../db/models/Project';
 
 export async function getServerSideProps() {

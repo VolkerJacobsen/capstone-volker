@@ -2,6 +2,7 @@ import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 import { StyledBox, StyledProjectListContainer } from "./ProjectList.styled.js";
 
 export default function ProjectList({ projectsData }) {
+  console.log("projectsData:", projectsData);
   return (
     <StyledBox>
       <StyledProjectListContainer>

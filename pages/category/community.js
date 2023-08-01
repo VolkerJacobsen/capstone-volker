@@ -1,7 +1,7 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 import StyledBack from "../../components/StyledBackButton/StyledBackButton";
 import { StyledHeaderText, StyledBox, StyledProjectListContainer } from "../../components/StylesPages/category.styled";
-import { connectToDatabase } from '../../db/connect';
+import connectToDatabase from '../../db/connect.js';
 import Project from '../../db/models/Project';
 
 export async function getServerSideProps() {
