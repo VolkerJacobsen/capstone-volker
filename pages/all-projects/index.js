@@ -1,12 +1,36 @@
 import ProjectList from "../../components/ProjectList/ProjectList";
 import { useState } from "react";
-import { projects as initialProjects } from "../../utils/data";
 import ProjectForm from "../../components/ProjectForm/ProjectForm";
 import {StyledHeaderText, StyledButton } from "../../components/StylesPages/all-projects.styled";
+import dbConnect from "../../db/connect";
+import Project from "../../db/models/Project";
+
+export async function getServerSideProps() {
+  try {
+    await dbConnect();
+
+    const projects = await Project.find();
+
+    const projectsData = JSON.parse(JSON.stringify(projects));
+    
+        return {
+          props: {
+            projectsData,
+          },
+        };
+      } catch (error) {
+        console.error("Error fetching data from MongoDB:", error);
+        return {
+                  props: {
+                    projectsData: [],
+                  },
+                };
+              }
+            }
 
 
 export default function HomePage() {
-  const [projectList, setProjectList] = useState(initialProjects);
+  const projectsData = useProjectsData();
   const [showForm, setShowForm] = useState(false);
 
   const handleShowForm = () => {
@@ -14,12 +38,15 @@ export default function HomePage() {
   };
 
   function handleAddProject(newProject) {
-    const updatedProjectList = [
-      { id: String(projectList.length + 1), ...newProject },
-      ...projectList,
-    ];
-    setProjectList(updatedProjectList);
-  }
+   Project.create(newProject)
+   .then((createdProject) => {
+    console.log("New project created: ", createdProject);
+    setProjectList((prevProjects) = [createdProject,...prevProjects]);
+   })
+   .catch((error) => {
+    console.log("Error creating new project:", error);
+  })
+};
 
   const handleCloseForm = () => {
     setShowForm(false);
@@ -38,7 +65,7 @@ export default function HomePage() {
         />
       )}
 
-      <ProjectList projects={projectList} />
+      <ProjectList projects={projectsData} />
     </>
   );
 }

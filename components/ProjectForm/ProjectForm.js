@@ -1,14 +1,9 @@
 import { useState, useLayoutEffect, useRef } from "react";
-import useLocalStorageState from "use-local-storage-state";
-import { v4 as uuidv4 } from "uuid";
 import { StyledFormContainer, StyledForm, StyledFieldset, StyledSubmitButton, StyledInput, StyledTextarea, StyledSelectContainer, StyledSelect } from "./ProjectForm.styled";
 
 
 export default function ProjectForm({ onAddProject, onCloseForm }) {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
-  const [projects, setProjects] = useLocalStorageState("projects", {
-    defaultValue: [],
-  });
   const [imageFile, setImageFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -26,50 +21,43 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
       const data = Object.fromEntries(formData);
 
       if (imageFile) {
-        formData.append("imageSource", imageFile);
-      }
 
-      const response = await fetch("/api/upload", {
+      const cloudinaryResponse = await fetch("/api/upload", {
         method: "POST",
-        body: formData,
+        body: imageFile,
       });
 
-      if (response.ok) {
-        const cloudinaryResponse = await response.json();
-        console.log("Cloudinary Response:", cloudinaryResponse);
-        const imageSource = cloudinaryResponse.src;
-
-        const slug = data.title.toLowerCase().replace(/\s+/g, "-");
-
-        const newProjectId = uuidv4();
-
-        const newProject = {
-          id: newProjectId,
-          title: data.title,
-          slug: slug,
-          shortDescription: data.shortDescription,
-          longdescription: data.longDescription,
-          category: data.category,
-          organizer: data.organizer,
-          contact: data.contact,
-          imageSource: imageSource,
-          width: 670,
-          height: 400,
-        };
-
-        onAddProject(newProject);
-        onCloseForm();
-      } else {
-        const { error } = await response.json();
-        throw new Error(error);
+      if (!cloudinaryResponse.ok) {
+        throw new Error("Failed to upload image to Cloudinary");
       }
+      const {secure_url: imageSource, width, height} = await cloudinaryResponse.json();
+      data.imageSource = imageSource;
+      data.width = width;
+      data.height = height;
+    }
+
+    const response = await fetch("/api/projects", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const newProject = await response.json();
+      onAddProject(newProject);
+      onCloseForm();
+    } else {
+          throw new Error("Failed to save project to MongoDB");
+    }
     } catch (error) {
-      console.log(error);
-      setError("Failed to upload image or something went wrong");
+      setError("Failed to upload image or save project date to MongoDB");
     } finally {
       setIsSubmitting(false);
     }
   }
+   
 
   function openSelectOptions() {
     setIsSelectOpen(true);

@@ -1,47 +1,61 @@
-import mongoose from 'mongoose'
+import { MongoClient } from 'mongodb';
+import { useEffect, useState } from 'react';
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error(
     'Please define the MONGODB_URI environment variable inside .env.local'
-  )
+  );
 }
 
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-let cached = global.mongoose
+let cachedDb = null;
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null }
-}
-
-async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn
-  }
-
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    }
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose
-    })
-  }
+export async function connectToDatabase() {
+  const uri = MONGODB_URI;
+  const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
   try {
-    cached.conn = await cached.promise
-  } catch (e) {
-    cached.promise = null
-    throw e
+    await client.connect();
+    return client.db('your-database-name');
+  } catch (error) {
+    console.log('Error connecting to MongoDB:', error);
+    throw error;
   }
-
-  return cached.conn
 }
 
-export default dbConnect
+export function useProjectsData() {
+  const [projectsData, setProjectsData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (cachedDb) {
+        const collection = cachedDb.collection('projects');
+        const data = await collection.find({}).toArray();
+        setProjectsData(data);
+      } else {
+        const client = new MongoClient(MONGODB_URI, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
+        await client.connect();
+        const db = client.db('your-database-name');
+        cachedDb = db;
+        const collection = db.collection('projects');
+        const data = await collection.find({}).toArray();
+        setProjectsData(data);
+      }
+    }
+
+    fetchData();
+
+    return () => {
+      // Clean up any resources if needed
+    };
+  }, []);
+
+  return projectsData;
+}

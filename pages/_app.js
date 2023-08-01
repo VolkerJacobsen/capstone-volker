@@ -1,5 +1,6 @@
+
 import GlobalStyle from "../styles";
-import { projects as initialProjects } from "../utils/data";
+import { useProjectsData } from '../db/connect';
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar/Navbar.js";
 import { FavoriteProvider } from "../components/Favorite/FavoriteContext";
@@ -8,7 +9,9 @@ import Layout from "../components/Layout/Layout";
 
 const mainFont = Julius_Sans_One({ weight: "400", subsets: ["latin"] });
 
-export default function App({ Component, pageProps }) {
+
+export default function App({ Component, pageProps}) {
+  const projectsData = useProjectsData();
   const router = useRouter();
   return (
     <>
@@ -18,7 +21,7 @@ export default function App({ Component, pageProps }) {
           <Navbar />
           <Component
             {...pageProps}
-            projects={initialProjects}
+            projectsData={projectsData}
             router={router}
           />
         </Layout>
@@ -26,3 +29,4 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
