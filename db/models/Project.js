@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+mongoose.set("debug", true);
+
 const { Schema } = mongoose;
 
 const projectSchema = new mongoose.Schema({
@@ -45,6 +47,8 @@ type: String,
     required: true,
   },
 });
+
+projectSchema.index({ slug: 1, _id: 1 });
 
 const Project = mongoose.models.Project || mongoose.model("Project", projectSchema, "projects");
 

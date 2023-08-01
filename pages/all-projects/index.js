@@ -9,7 +9,8 @@ export async function getServerSideProps() {
   try {
     const db = await connectToDatabase();
     console.log('Connected to MongoDB successfully');
-    const projects = await Project.find();
+    console.log('Fetching projects...');
+    const projects = await projects.find();
     console.log('Fetched projects:', projects);
     const projectsData = JSON.parse(JSON.stringify(projects));
     console.log('Parsed projects data:', projectsData);
