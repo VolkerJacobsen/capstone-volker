@@ -8,7 +8,7 @@ if (!MONGODB_URI) {
 
 let cachedDb = null;
 
-export async function connectToDatabase() {
+export default async function connectToDatabase() {
   const uri = MONGODB_URI;
   const client = new MongoClient(uri, {
     useNewUrlParser: true,

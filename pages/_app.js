@@ -11,7 +11,6 @@ const mainFont = Julius_Sans_One({ weight: "400", subsets: ["latin"] });
 
 
 export default function App({ Component, pageProps}) {
-  const projectsData = useProjectsData();
   const router = useRouter();
   return (
     <>
@@ -21,7 +20,6 @@ export default function App({ Component, pageProps}) {
           <Navbar />
           <Component
             {...pageProps}
-            projectsData={projectsData}
             router={router}
           />
         </Layout>
