@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+
+// next.config.js
+require('dotenv').config();
+
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -29,6 +33,13 @@ const nextConfig = {
 
     return config;
   },
+
+  env: {
+    MONGODB_URI: process.env.MONGODB_URI,
+  },
 };
 
 module.exports = nextConfig;
+
+
+

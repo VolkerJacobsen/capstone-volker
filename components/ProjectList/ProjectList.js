@@ -6,7 +6,7 @@ export default function ProjectList({ projectsData }) {
   return (
     <StyledBox>
       <StyledProjectListContainer>
-        {projectsData.map((project) => {
+        {projectsData?.map((project) => {
           return (
             <div key={project._id}>
               <>

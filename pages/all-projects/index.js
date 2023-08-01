@@ -8,8 +8,11 @@ import Project from '../../db/models/Project';
 export async function getServerSideProps() {
   try {
     const db = await connectToDatabase();
+    console.log('Connected to MongoDB successfully');
     const projects = await Project.find();
+    console.log('Fetched projects:', projects);
     const projectsData = JSON.parse(JSON.stringify(projects));
+    console.log('Parsed projects data:', projectsData);
     return {
       props: {
         projectsData,
@@ -25,7 +28,7 @@ export async function getServerSideProps() {
   }
 }
 
-export default function HomePage() {
+export default function HomePage({projectsData}) {
   const [showForm, setShowForm] = useState(false);
 
   const handleShowForm = () => {
