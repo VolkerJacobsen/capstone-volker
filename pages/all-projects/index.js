@@ -3,14 +3,13 @@ import { useState } from "react";
 import ProjectForm from "../../components/ProjectForm/ProjectForm";
 import {StyledHeaderText, StyledButton } from "../../components/StylesPages/all-projects.styled";
 import connectToDatabase from '../../db/connect.js';
-import Project from '../../db/models/Project';
+import Project from '../../db/models/Project.js';
 
 export async function getServerSideProps() {
   try {
-    const db = await connectToDatabase();
-    console.log('Connected to MongoDB successfully');
+    await connectToDatabase();
     console.log('Fetching projects...');
-    const projects = await projects.find();
+    const projects = await Project.find();
     console.log('Fetched projects:', projects);
     const projectsData = JSON.parse(JSON.stringify(projects));
     console.log('Parsed projects data:', projectsData);

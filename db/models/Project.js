@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
 
-mongoose.set("debug", true);
-
-const { Schema } = mongoose;
-
 const projectSchema = new mongoose.Schema({
 
   title: {
