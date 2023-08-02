@@ -1,12 +1,12 @@
 import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 import { StyledBox, StyledProjectListContainer } from "./ProjectList.styled.js";
 
-export default function ProjectList({ projectsData }) {
-  console.log("projectsData:", projectsData);
+export default function ProjectList({ projects }) {
+  console.log("projects:", projects);
   return (
     <StyledBox>
       <StyledProjectListContainer>
-        {projectsData?.map((project) => {
+        {projects.map((project) => {
           return (
             <div key={project._id}>
               <>

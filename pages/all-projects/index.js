@@ -39,6 +39,8 @@ export default function HomePage({projectsData}) {
    Project.create(newProject)
    .then((createdProject) => {
     console.log("New project created: ", createdProject);
+    const updatedProjectData = [...projectsData, createdProject];
+    console.log("Updated projectsData:", updatedProjectsData);
    })
    .catch((error) => {
     console.log("Error creating new project:", error);

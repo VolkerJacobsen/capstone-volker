@@ -28,10 +28,14 @@ export default async function handler(request, response) {
         { _id: id },
         {
           $set: {
+            slug,
             title,
             shortDescription,
             longDescription,
             category,
+            imageSource,
+            width,
+            height,
             organizer,
             contact,
           },

@@ -46,6 +46,6 @@ type: String,
 
 projectSchema.index({ slug: 1, _id: 1 });
 
-const Project = mongoose.models.Project || mongoose.model("Project", projectSchema, "projects");
+const Project = mongoose.models.Project || mongoose.model("Project", projectSchema);
 
 export default Project;
