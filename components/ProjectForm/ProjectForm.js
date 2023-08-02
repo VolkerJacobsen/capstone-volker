@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyledFormContainer, StyledForm, StyledFieldset, StyledSubmitButton, StyledInput, StyledTextarea, StyledSelectContainer, StyledSelect } from "./ProjectForm.styled";
 
 
@@ -66,9 +66,9 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
   const shortDescriptionTextbox = useRef(null);
   const longDescriptionTextbox = useRef(null);
 
-  function adjustHeight() {
-    textbox.current.style.height = "inherit";
-    textbox.current.style.height = `${textbox.current.scrollHeight}px`;
+  function adjustHeight(textboxRef) {
+    textboxRef.current.style.height = "inherit";
+    textboxRef.current.style.height = `${textboxRef.current.scrollHeight}px`;
   }
 
   useEffect(() => {

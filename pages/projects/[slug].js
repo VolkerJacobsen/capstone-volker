@@ -1,44 +1,33 @@
 import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
 import { useRouter } from "next/router";
-import connectToDatabase from '../../db/connect.js';
-import Project from '../../db/models/Project.js';
+import useSWR from "swr";
 
-export async function getServerSideProps(context) {
-  const { slug } = context.params;
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
-  try {
-    await connectToDatabase();
-    console.log('Fetching projects...');
-    const projects = await Project.find();
-    console.log('Fetched projects:', projects);
-    const projectsData = JSON.parse(JSON.stringify(projects));
-    console.log('Parsed projects data:', projectsData);
-    
-    const currentProject = projectsData.find((project) => project.slug === slug);
+export default function ProjectDetailsPage() {
+  const router = useRouter();
+  const { isReady } = router;
+  const { slug } = router.query;
 
-    return {
-      props: {
-        currentProject,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data from MongoDB:', error);
-    return {
-      props: {
-        currentProject: null,
-      },
-    };
+  const { data: projectsData, error } = useSWR("/api/projects", fetcher);
+
+  if (!isReady || !projectsData) return <h2>Loading...</h2>;
+
+  if (error) {
+    console.error("Error fetching projects:", error);
+    return <h2>Error loading projects data.</h2>;
   }
-}
 
-export default function ProjectDetailsPage({ currentProject }) {
-  if (!currentProject) {
-    return <div>Project not found</div>;
+  // Filter the project data for the given slug
+  const projectData = projectsData.find((project) => project.slug === slug);
+
+  if (!projectData) {
+    return <h2>Project not found</h2>;
   }
 
   return (
     <div>
-      <ProjectDetail project={currentProject} />
+      <ProjectDetail project={projectData} />
     </div>
   );
 }

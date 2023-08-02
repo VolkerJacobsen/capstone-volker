@@ -7,7 +7,7 @@ export default function ProjectPreview({project}) {
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    setFavorite(isFavorite(slug));
+    setFavorite(isFavorite(project.slug));
   }, [isFavorite, project.slug]);
 
   const handleFavoriteToggle = () => {

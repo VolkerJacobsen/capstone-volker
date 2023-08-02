@@ -2,31 +2,7 @@ import ProjectList from "../../components/ProjectList/ProjectList";
 import { useState } from "react";
 import ProjectForm from "../../components/ProjectForm/ProjectForm";
 import {StyledHeaderText, StyledButton } from "../../components/StylesPages/all-projects.styled";
-import connectToDatabase from '../../db/connect.js';
-import Project from '../../db/models/Project';
 
-export async function getServerSideProps() {
-  try {
-    await connectToDatabase();
-    console.log('Fetching projects...');
-    const projects = await Project.find();
-    console.log('Fetched projects:', projects);
-    const projectsData = JSON.parse(JSON.stringify(projects));
-    console.log('Parsed projects data:', projectsData);
-    return {
-      props: {
-        projectsData,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data from MongoDB:', error);
-    return {
-      props: {
-        projectsData: [],
-      },
-    };
-  }
-}
 
 export default function HomePage({projectsData}) {
   const [showForm, setShowForm] = useState(false);

@@ -1,34 +1,20 @@
 import ProjectPreview from "../../components/ProjectPreview/ProjectPreview";
 import StyledBack from "../../components/StyledBackButton/StyledBackButton";
 import { StyledHeaderText, StyledBox, StyledProjectListContainer } from "../../components/StylesPages/category.styled";
-import connectToDatabase from '../../db/connect.js';
-import Project from '../../db/models/Project';
+import useSWR from "swr";
 
-export async function getServerSideProps() {
-  try {
-    await connectToDatabase();
-    console.log('Fetching projects...');
-    const projects = await Project.find();
-    console.log('Fetched projects:', projects);
-    const projectsData = JSON.parse(JSON.stringify(projects));
-    console.log('Parsed projects data:', projectsData);
-    return {
-      props: {
-        projectsData,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data from MongoDB:', error);
-    return {
-      props: {
-        projectsData: [],
-      },
-    };
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function EnvironmentPage() {
+  const { data: projectsData, error } = useSWR("/api/projects", fetcher);
+
+  if (!projectsData) return <h2>Loading...</h2>;
+
+  if (error) {
+    console.error("Error fetching projects:", error);
+    return <h2>Error loading projects data.</h2>;
   }
-}
 
-
-export default function EnvironmentPage({ projectsData }) {
   const environmentProjects = projectsData.filter(
     (project) => project.category === "Environment"
   );
@@ -42,12 +28,7 @@ export default function EnvironmentPage({ projectsData }) {
           {environmentProjects.map((project) => (
             <div key={project._id}>
               <ProjectPreview
-                category={project.category}
-                title={project.title}
-                imageSource={project.imageSource}
-                organizer={project.organizer}
-                shortDescription={project.shortDescription}
-                slug={project.slug}
+               project={project}
               ></ProjectPreview>
             </div>
           ))}

@@ -1,14 +1,15 @@
 import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 import { StyledBox, StyledProjectListContainer } from "./ProjectList.styled.js";
+import useSWR from "swr";
 
-export default function ProjectList({ projects }) {
-  if (!projects || projects.length === 0) {
-    return <div>No projects found.</div>;
-  }
+export default function ProjectList() {
+  const { data } = useSWR("/api/projects", { fallbackData: [] });
+  console.log(data);
+
   return (
     <StyledBox>
       <StyledProjectListContainer>
-        {projects.map((project) => {
+        {data.map((project) => {
           return (
             <div key={project._id}>
               <>
