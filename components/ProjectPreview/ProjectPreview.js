@@ -2,20 +2,13 @@ import { useFavorite } from "../Favorite/FavoriteContext";
 import { useState, useEffect } from "react";
 import { StyledProjectContainer, StyledImage, StyledLinkContainer, StyledLink, StyledFavoriteButton} from "./ProjectPreview.styled";
 
-export default function ProjectPreview({
-  category,
-  title,
-  imageSource,
-  organizer,
-  shortDescription,
-  slug,
-}) {
+export default function ProjectPreview({project}) {
   const { isFavorite, toggleFavorite } = useFavorite();
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     setFavorite(isFavorite(slug));
-  }, [isFavorite, slug]);
+  }, [isFavorite, project.slug]);
 
   const handleFavoriteToggle = () => {
     const newFavorite = !favorite;
@@ -23,7 +16,7 @@ export default function ProjectPreview({
     toggleFavorite(slug, newFavorite);
   };
 
-  console.log("Rendering ProjectPreview with Slug:", slug);
+  console.log("Rendering ProjectPreview with Slug:", project.slug);
 
   return (
     <>
@@ -40,17 +33,17 @@ export default function ProjectPreview({
             />
           </svg>
         </StyledFavoriteButton>
-        <StyledLink href={`/projects/${slug}`} $passHref>
+        <StyledLink href={`/projects/${project.slug}`} $passHref>
           <StyledProjectContainer>
-            <p className="category">{category}</p>
-            <h2>{title}</h2>
+            <p className="category">{project.category}</p>
+            <h2>{project.title}</h2>
             <StyledImage
-              src={imageSource}
-              alt={`Photo ${title} by ${organizer}`}
+              src={project.imageSource}
+              alt={`Photo ${project.title} by ${project.organizer}`}
               width={670}
               height={400}
             />
-            <p>{shortDescription}</p>
+            <p>{project.shortDescription}</p>
           </StyledProjectContainer>
         </StyledLink>
       </StyledLinkContainer>

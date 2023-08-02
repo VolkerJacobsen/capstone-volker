@@ -2,7 +2,9 @@ import ProjectPreview from "../ProjectPreview/ProjectPreview.js";
 import { StyledBox, StyledProjectListContainer } from "./ProjectList.styled.js";
 
 export default function ProjectList({ projects }) {
-  console.log("projects:", projects);
+  if (!projects || projects.length === 0) {
+    return <div>No projects found.</div>;
+  }
   return (
     <StyledBox>
       <StyledProjectListContainer>
@@ -11,12 +13,6 @@ export default function ProjectList({ projects }) {
             <div key={project._id}>
               <>
                 <ProjectPreview
-                  category={project.category}
-                  title={project.title}
-                  imageSource={project.imageSource}
-                  organizer={project.organizer}
-                  shortDescription={project.shortDescription}
-                  slug={project.slug}
                   project={project}
                 ></ProjectPreview>
               </>
