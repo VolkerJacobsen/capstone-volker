@@ -3,7 +3,7 @@ import { useState } from "react";
 import ProjectForm from "../../components/ProjectForm/ProjectForm";
 import {StyledHeaderText, StyledButton } from "../../components/StylesPages/all-projects.styled";
 import connectToDatabase from '../../db/connect.js';
-import Project from '../../db/models/Project.js';
+import Project from '../../db/models/Project';
 
 export async function getServerSideProps() {
   try {
@@ -39,7 +39,7 @@ export default function HomePage({projectsData}) {
    Project.create(newProject)
    .then((createdProject) => {
     console.log("New project created: ", createdProject);
-    const updatedProjectData = [...projectsData, createdProject];
+    const updatedProjectsData = [...projectsData, createdProject];
     console.log("Updated projectsData:", updatedProjectsData);
    })
    .catch((error) => {
@@ -63,7 +63,6 @@ export default function HomePage({projectsData}) {
           onCloseForm={handleCloseForm}
         />
       )}
-
       <ProjectList projects={projectsData} />
     </>
   );

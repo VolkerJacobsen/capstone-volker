@@ -63,17 +63,21 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
     setIsSelectOpen(true);
   }
 
-  const textbox = useRef(null);
+  const shortDescriptionTextbox = useRef(null);
+  const longDescriptionTextbox = useRef(null);
 
   function adjustHeight() {
     textbox.current.style.height = "inherit";
     textbox.current.style.height = `${textbox.current.scrollHeight}px`;
   }
 
-  useLayoutEffect(adjustHeight, []);
+  useEffect(() => {
+    adjustHeight(shortDescriptionTextbox);
+    adjustHeight(longDescriptionTextbox);
+  }, []);
 
-  function handleKeyDown(e) {
-    adjustHeight();
+  function handleKeyDown(textboxRef) {
+    adjustHeight(textboxRef);
   }
 
   return (
@@ -105,8 +109,8 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           <label htmlFor="shortDescription">
             <p>Short description: </p>
             <StyledTextarea
-              ref={textbox}
-              onChange={handleKeyDown}
+              ref={shortDescriptionTextbox}
+              onChange={(event) => handleKeyDown(event, shortDescriptionTextbox)}
               name="shortDescription"
               id="shortDescription"
               minLength="30"
@@ -118,8 +122,8 @@ export default function ProjectForm({ onAddProject, onCloseForm }) {
           <label htmlFor="longDescription">
             <p>Long description: </p>
             <StyledTextarea
-              ref={textbox}
-              onChange={handleKeyDown}
+              ref={longDescriptionTextbox}
+              onChange={(event) => handleKeyDown(event, longDescriptionTextbox)}
               name="longDescription"
               id="longDescription"
               minLength="50"

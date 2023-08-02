@@ -6,9 +6,12 @@ import Project from '../../db/models/Project';
 
 export async function getServerSideProps() {
   try {
-    const db = await connectToDatabase();
+    await connectToDatabase();
+    console.log('Fetching projects...');
     const projects = await Project.find();
+    console.log('Fetched projects:', projects);
     const projectsData = JSON.parse(JSON.stringify(projects));
+    console.log('Parsed projects data:', projectsData);
     return {
       props: {
         projectsData,
@@ -36,7 +39,7 @@ export default function CommunityPage({ projectsData }) {
       <StyledBox>
         <StyledProjectListContainer>
           {communityProjects.map((project) => (
-            <div key={project.id}>
+            <div key={project._id}>
               <ProjectPreview
                 category={project.category}
                 title={project.title}
