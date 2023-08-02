@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema({
-
+  id: {
+    type: String,
+    virtual: true,
+  },
   title: {
     type: String,
     required: true,
